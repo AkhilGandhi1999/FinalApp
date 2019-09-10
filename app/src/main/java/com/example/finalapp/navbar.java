@@ -1,30 +1,42 @@
 package com.example.finalapp;
 
 import android.os.Bundle;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.fragment.app.Fragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
 
-public class navbar extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+public class navbar extends AppCompatActivity implements OnNavigationItemSelectedListener {
+    /* access modifiers changed from: protected */
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_navbar);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
+        setContentView((int) R.layout.activity_navbar);
+        ((BottomNavigationView) findViewById(R.id.nav_view)).setOnNavigationItemSelectedListener(this);
+        loadfragment(new HomeFragment());
     }
 
+    private boolean loadfragment(Fragment fragment) {
+        if (fragment == null) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean onNavigationItemSelected(MenuItem item) {
+        Fragment fragment = null;
+        switch (item.getItemId()) {
+            case R.id.navigation_dashboard /*2131230914*/:
+                fragment = new GraphFragment();
+                break;
+            case R.id.navigation_home /*2131230916*/:
+                fragment = new HomeFragment();
+                break;
+            case R.id.navigation_notifications /*2131230917*/:
+                fragment = new MapsFragment();
+                break;
+        }
+        return loadfragment(fragment);
+    }
 }
