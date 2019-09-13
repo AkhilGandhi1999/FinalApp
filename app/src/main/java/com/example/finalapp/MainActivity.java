@@ -8,7 +8,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,51 +23,73 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText pass_ed;
 
-    /* access modifiers changed from: protected */
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView((int)R.layout.activity_main);
-        this.mAuth = FirebaseAuth.getInstance();
+        setContentView((int) R.layout.activity_main);
+
+
+
         initialize();
-        this.login_bt.setOnClickListener(new OnClickListener() {
+        mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null)
+        {
+            startActivity(new Intent(MainActivity.this,navbar.class));
+            finish();
+        }
+
+        login_bt.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
-                MainActivity.this.loginUser();
+                loginUser();
             }
         });
-        this.bt1.setOnClickListener(new OnClickListener() {
+
+        bt1.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
-                MainActivity.this.startActivity(new Intent(view.getContext(), SignUp.class));
+                Intent signup_int = new Intent(MainActivity.this,SignUp.class);
+                signup_int.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                signup_int.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK );
+                startActivity(signup_int);
             }
         });
     }
 
-    /* access modifiers changed from: private */
+
     public void loginUser() {
         String email = this.email_ed.getText().toString();
         String password = this.pass_ed.getText().toString();
+
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(getApplicationContext(), "Please Enter your email id", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "Please Enter your email id", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(password)) {
-            Toast.makeText(getApplicationContext(), "Please Enter your Password", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "Please Enter your Password", Toast.LENGTH_LONG).show();
         } else {
+
+
             this.mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 public void onComplete(Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(MainActivity.this.getApplicationContext(), "Login Successfull", Toast.LENGTH_LONG).show();
-                        MainActivity.this.startActivity(new Intent(MainActivity.this, navbar.class));
-                        MainActivity.this.finish();
-                        return;
+
+                        Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_LONG).show();
+                        email_ed.setText("");
+                        pass_ed.setText("");
+                        Intent profile = new Intent(MainActivity.this, navbar.class);
+                        profile.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(profile);
+                        finish();
                     }
-                    Toast.makeText(MainActivity.this.getApplicationContext(), "Login Failed", Toast.LENGTH_LONG).show();
+                    else {
+                        Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
+                    }
                 }
             });
         }
     }
 
     private void initialize() {
-        this.bt1 = (Button) findViewById(R.id.button2);
-        this.login_bt = (Button) findViewById(R.id.button);
-        this.email_ed = (EditText) findViewById(R.id.editText3);
-        this.pass_ed = (EditText) findViewById(R.id.editText4);
+        bt1 = (Button) findViewById(R.id.button2);
+        login_bt = (Button) findViewById(R.id.button);
+        email_ed = (EditText) findViewById(R.id.editText3);
+        pass_ed = (EditText) findViewById(R.id.editText4);
     }
 }

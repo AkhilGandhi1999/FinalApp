@@ -11,23 +11,26 @@ public class navbar extends AppCompatActivity implements OnNavigationItemSelecte
     /* access modifiers changed from: protected */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView((int) R.layout.activity_navbar);
-        ((BottomNavigationView) findViewById(R.id.nav_view)).setOnNavigationItemSelectedListener(this);
+        setContentView(R.layout.activity_navbar);
+        BottomNavigationView navigation = findViewById(R.id.nav_view);
+        navigation.setOnNavigationItemSelectedListener(this);
         loadfragment(new HomeFragment());
     }
 
     private boolean loadfragment(Fragment fragment) {
-        if (fragment == null) {
-            return false;
+        if (fragment != null) {
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.fg1,fragment).commit();
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     public boolean onNavigationItemSelected(MenuItem item) {
         Fragment fragment = null;
         switch (item.getItemId()) {
-            case R.id.navigation_dashboard /*2131230914*/:
+            case R.id.navigation_dashboard :
                 fragment = new GraphFragment();
                 break;
             case R.id.navigation_home /*2131230916*/:

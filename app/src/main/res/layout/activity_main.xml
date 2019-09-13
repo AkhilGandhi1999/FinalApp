@@ -51,7 +51,6 @@
         android:id="@+id/editText4"
         android:layout_width="294dp"
         android:layout_height="55dp"
-        android:layout_marginTop="448dp"
         android:background="@drawable/group3"
         android:ems="10"
         android:hint="Password"
@@ -62,6 +61,6 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.029" />
+        app:layout_constraintVertical_bias="0.575" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

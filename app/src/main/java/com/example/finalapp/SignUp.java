@@ -8,7 +8,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,24 +23,28 @@ public class SignUp extends AppCompatActivity {
     private EditText pass_ed;
     private Button sign_up;
 
-    /* access modifiers changed from: protected */
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView((int) R.layout.activity_sign_up);
+
+
         initialize();
-        this.mAuth = FirebaseAuth.getInstance();
-        this.sign_up.setOnClickListener(new OnClickListener() {
+        mAuth = FirebaseAuth.getInstance();
+        sign_up.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
-                SignUp.this.reg_new();
+                reg_new();
             }
         });
     }
 
-    /* access modifiers changed from: private */
-    public void reg_new() {
-        String email = this.email_ed.getText().toString();
-        String password = this.pass_ed.getText().toString();
-        if (!TextUtils.equals(password, this.confirm_ed.getText().toString())) {
+
+        public void reg_new() {
+
+        String email = email_ed.getText().toString();
+        String password = pass_ed.getText().toString();
+
+        if (!TextUtils.equals(password, confirm_ed.getText().toString())) {
             Toast.makeText(getApplicationContext(), "Password not match", Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), "Please enter email...", Toast.LENGTH_LONG).show();
@@ -49,20 +55,24 @@ public class SignUp extends AppCompatActivity {
                 public void onComplete(Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Toast.makeText(SignUp.this.getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
-                        SignUp.this.startActivity(new Intent(SignUp.this, navbar.class));
-                        SignUp.this.finish();
-                        return;
+                        startActivity(new Intent(SignUp.this,navbar.class));
+                        finish();
+
                     }
-                    Toast.makeText(SignUp.this.getApplicationContext(), "Registration failed! Please try again later", Toast.LENGTH_LONG).show();
+                    else
+                    {
+                        Toast.makeText(SignUp.this.getApplicationContext(), "Registration failed! Please try again later", Toast.LENGTH_LONG).show();
+
+                    }
                 }
             });
         }
     }
 
     private void initialize() {
-        this.email_ed = (EditText) findViewById(R.id.editText);
-        this.pass_ed = (EditText) findViewById(R.id.editText2);
-        this.confirm_ed = (EditText) findViewById(R.id.editText5);
-        this.sign_up = (Button) findViewById(R.id.button3);
+        email_ed = (EditText) findViewById(R.id.editText);
+        pass_ed = (EditText) findViewById(R.id.editText2);
+        confirm_ed = (EditText) findViewById(R.id.editText5);
+        sign_up = (Button) findViewById(R.id.button3);
     }
 }
