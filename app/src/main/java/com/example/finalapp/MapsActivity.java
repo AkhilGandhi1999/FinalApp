@@ -23,9 +23,9 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsFragment extends Fragment {
+public class MapsActivity extends Fragment {
 
-    public MapsFragment() {
+    public MapsActivity() {
         // Required empty public constructor
     }
 
@@ -39,9 +39,9 @@ public class MapsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_maps, container, false);
+        View rootView = inflater.inflate(R.layout.activity_maps, container, false);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.frame);  //use SuppoprtMapFragment for using in fragment instead of activity  MapFragment = activity   SupportMapFragment = fragment
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);  //use SuppoprtMapFragment for using in fragment instead of activity  MapFragment = activity   SupportMapFragment = fragment
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap mMap) {
@@ -60,8 +60,7 @@ public class MapsFragment extends Fragment {
 
                 mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(37.4219999, -122.0862462))
-                        .title("Spider Man")
-                        .icon(bitmapDescriptorFromVector(getActivity(),R.drawable.bb)));
+                        .title("Spider Man"));
 
                 mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(37.4629101,-122.2449094))

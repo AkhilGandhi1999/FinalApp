@@ -8,7 +8,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
 
 public class navbar extends AppCompatActivity implements OnNavigationItemSelectedListener {
-    /* access modifiers changed from: protected */
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navbar);
@@ -37,7 +37,7 @@ public class navbar extends AppCompatActivity implements OnNavigationItemSelecte
                 fragment = new HomeFragment();
                 break;
             case R.id.navigation_notifications /*2131230917*/:
-                fragment = new MapsFragment();
+                fragment = new MapsActivity();
                 break;
         }
         return loadfragment(fragment);

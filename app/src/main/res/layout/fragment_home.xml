@@ -10,9 +10,7 @@
     android:id="@+id/buttonsign_out"
     android:text="Sign Out"
     android:textAllCaps="false"
-    android:layout_centerInParent="true"
-    >
-
+    android:layout_centerInParent="true">
 
 </Button>
 </RelativeLayout>
