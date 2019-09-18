@@ -10,11 +10,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 public class MainActivity extends AppCompatActivity {
     Button bt1;
@@ -29,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView((int) R.layout.activity_main);
 
 
-
         initialize();
         mAuth = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser() != null)
@@ -37,6 +39,16 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this,navbar.class));
             finish();
         }
+
+        findViewById(R.id.notify).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent not = new Intent(MainActivity.this,SignUp.class);
+                startActivity(not);
+               // finish();
+            }
+        });
+
 
         login_bt.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
