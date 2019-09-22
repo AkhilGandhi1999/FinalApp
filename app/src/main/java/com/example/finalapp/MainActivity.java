@@ -40,14 +40,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
-        findViewById(R.id.notify).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent not = new Intent(MainActivity.this,SignUp.class);
-                startActivity(not);
-               // finish();
-            }
-        });
+
 
 
         login_bt.setOnClickListener(new OnClickListener() {

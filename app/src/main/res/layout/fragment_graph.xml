@@ -7,11 +7,43 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="150dp"
+        android:layout_marginTop="30dp"
+        android:id="@+id/dis_text"
+        android:textSize="30sp"
         android:text="Graph"
         >
-
-
     </TextView>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/input"
+        ></EditText>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/apply"
+        android:textSize="20sp"
+        android:text="Apply Text"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        ></Button>
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switch_1"
+        android:layout_gravity="center_horizontal"
+
+        ></Switch>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/save_Data"
+        android:textSize="20sp"
+        android:text="Save Data"
+        android:layout_gravity="center_horizontal"
+        ></Button>
 
 </LinearLayout>

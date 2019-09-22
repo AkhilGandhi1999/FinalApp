@@ -46,7 +46,6 @@ public class NotificationDemo extends AppCompatActivity {
 
     public void set_channel1(String title,String mess) // View important when using onclick function
     {
-
         Intent noti = new Intent(appCompatActivity, HomeFragment.class);
         PendingIntent noti_pen = PendingIntent.getActivity(appCompatActivity, 0, noti, 0);//Pending intent for activity
 

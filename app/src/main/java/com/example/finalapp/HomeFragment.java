@@ -39,8 +39,8 @@ public class HomeFragment extends Fragment   {
         mAuth = FirebaseAuth.getInstance();
         view = inflater.inflate(R.layout.fragment_home, null);
 
-        et1 = view.findViewById(R.id.ed1);
-        et2 = view.findViewById(R.id.ed2);
+      //  et1 = view.findViewById(R.id.ed1);
+       // et2 = view.findViewById(R.id.ed2);
 
         view.findViewById(R.id.buttonsign_out).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +52,15 @@ public class HomeFragment extends Fragment   {
             }
         });
 
-        view.findViewById(R.id.pick_time).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.list_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent list = new Intent(getContext(),ListMed.class);
+                startActivity(list);
+            }
+        });
+
+     /*   view.findViewById(R.id.pick_time).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DialogFragment newFragment = new TimePicker();
@@ -92,15 +100,11 @@ public class HomeFragment extends Fragment   {
                 Bitmap largeicon =  BitmapFactory.decodeResource(getResources(),R.drawable.bb);
                 notificationDemo.set_channel3(title,mess,largeicon);
             }
-        });
+        });*/
         return view;
     }
 
-
-
-
 }
-
 
 
 

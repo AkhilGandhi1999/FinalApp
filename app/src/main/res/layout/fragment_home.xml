@@ -1,69 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-<Button
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:id="@+id/buttonsign_out"
-    android:text="Sign Out"
-    android:textAllCaps="false"
-    android:layout_centerInParent="true">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</Button>
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:id="@+id/pick_time"
-        android:layout_marginTop="20dp"
-        android:text="Set Timer"
-        ></Button>
-
-    <EditText
-        android:id="@+id/ed1"
+        android:id="@+id/buttonsign_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:hint="Title">
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="Sign Out"
+        android:textAllCaps="false">
 
-    </EditText>
-
-    <EditText
-        android:id="@+id/ed2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:hint="Message">
-
-    </EditText>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="Channel 1"
-        android:id="@+id/button1"
-        android:layout_marginTop="15dp"
-        >
     </Button>
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
+        android:id="@+id/pick_time"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Channel 2"
-        android:textAllCaps="false"></Button>
-
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Set Timer"></Button>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/list_view"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Channel 3"
-        android:textAllCaps="false"></Button>
+        android:text="Button" />
 
+    <!--   <EditText
+         android:id="@+id/ed1"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="30dp"
+         android:hint="Title">
+
+     </EditText>
+
+     <EditText
+         android:id="@+id/ed2"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="30dp"
+         android:hint="Message">
+
+     </EditText>
+     <Button
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:textAllCaps="false"
+         android:text="Channel 1"
+         android:id="@+id/button1"
+         android:layout_marginTop="15dp"
+         >
+     </Button>
+
+     <Button
+         android:id="@+id/button2"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="15dp"
+         android:text="Channel 2"
+         android:textAllCaps="false"></Button>
+
+
+     <Button
+         android:id="@+id/button3"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="15dp"
+         android:text="Channel 3"
+         android:textAllCaps="false"></Button>
+         -->
 </LinearLayout>
