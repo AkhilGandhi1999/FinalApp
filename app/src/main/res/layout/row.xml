@@ -45,7 +45,7 @@
             android:layout_toRightOf="@id/img1"
             android:layout_below="@id/txt1"
             android:layout_marginTop="5dp"
-
+            android:layout_marginLeft="16dp"
             />
 
     </RelativeLayout>
