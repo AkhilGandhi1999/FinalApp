@@ -10,8 +10,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InsertMed"></activity>
-        <activity android:name=".ListMed" />
+        <activity android:name=".InsertMed"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            ></activity>
+        <activity android:name=".ListMed"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            />
         <activity android:name=".NotificationDemo" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

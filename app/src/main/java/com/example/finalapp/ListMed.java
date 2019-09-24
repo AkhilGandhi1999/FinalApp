@@ -1,9 +1,12 @@
 package com.example.finalapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,47 +42,44 @@ public class ListMed extends AppCompatActivity {
     Model m = new Model();
     Model m1 = new Model();
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case 0:
+                if (resultCode == Activity.RESULT_OK) {
+                    title = data.getStringExtra("key1");
+                    des = data.getStringExtra("key2");
+                    Toast.makeText(getApplicationContext(), title, Toast.LENGTH_LONG).show();
+                    models = getList(title, des);
+                    myAdaptor = new MyAdaptor(getApplicationContext(), models);
+                    recyclerView.setAdapter(myAdaptor);
+                    saveData();
+                }
+                break;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_med);
 
-
         recyclerView = findViewById(R.id.recycleview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // recyclerView1 = findViewById(R.id.recycleview);
-        //  recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-
-        title = getIntent().getStringExtra("key1");
-        des = getIntent().getStringExtra("key1");
-
-            LoadData();
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
 
 
-
+        LoadData();
         //myAdaptor = new MyAdaptor(getApplicationContext(), models);
 
         findViewById(R.id.float_bt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                models = getList(title, des);
-
-
-                    saveData();
-
-                myAdaptor = new MyAdaptor(getApplicationContext(), models);
-                recyclerView.setAdapter(myAdaptor);
+                Intent list_all = new Intent(getApplicationContext(), InsertMed.class);
+                startActivityForResult(list_all,0);
             }
         });
-      /*  findViewById(R.id.float_bt).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent list_all = new Intent(getApplicationContext(), InsertMed.class);
-                startActivity(list_all);
-            }
-        });*/
         //  recyclerView.setAdapter(myAdaptor);
 
     }
@@ -87,52 +87,55 @@ public class ListMed extends AppCompatActivity {
     private ArrayList<Model> getList(String title, String des) {
 
         m = new Model();
-        m.setTitle("News Feed");
-        m.setDescription("This is news feed description");
+        m.setTitle(title);
+        m.setDescription(des);
         m.setImg(R.drawable.pills);
         models.add(m);
         return models;
 
     }
 
-    public void saveData()  {
+    public void saveData() {
 
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PEF, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson=new Gson();
-        String json=gson.toJson(models);
-        editor.putString(ARRAY_LIST,json);
+        Gson gson = new Gson();
+        String json = gson.toJson(models);
+        editor.putString(ARRAY_LIST, json);
         editor.apply();
-        Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+      //  Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
     }
 
-    public void LoadData()  {
+    public void LoadData() {
         String json;
         SharedPreferences sharedPreferences1 = getSharedPreferences(SHARED_PEF, Context.MODE_PRIVATE);
-        json = sharedPreferences1.getString(ARRAY_LIST,"");
-        Gson gson=new Gson();
-        Type type = new TypeToken<ArrayList<Model>>() {}.getType();
+        json = sharedPreferences1.getString(ARRAY_LIST, null);
+        if (json == null) {
+            Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<Model>>() {
+        }.getType();
 
-        models = gson.fromJson(json,type);
+        models = gson.fromJson(json, type);
 
 
         //    m2 = (ArrayList<String>) ObjectSerializer.deserialize(sharedPreferences1.getString(ARRAY_LIST, ObjectSerializer.serialize(new ArrayList<String>())));
 
 
-      //  Toast.makeText(getApplicationContext(),models1.toString(), Toast.LENGTH_LONG).show();
+        //  Toast.makeText(getApplicationContext(),models1.toString(), Toast.LENGTH_LONG).show();
 
 
       /* for(int i=0;i<models1.size();i++)
         {
-
             m = new Model();
             m.setTitle("News Feed");
             m.setDescription("This is news feed description");
             m.setImg(R.drawable.pills);
             Toast.makeText(getApplicationContext(), "Load", Toast.LENGTH_LONG).show();
-
         }*/
-
+        Toast.makeText(getApplicationContext(), "Load", Toast.LENGTH_LONG).show();
         myAdaptor = new MyAdaptor(getApplicationContext(), models);
         recyclerView.setAdapter(myAdaptor);
     }
