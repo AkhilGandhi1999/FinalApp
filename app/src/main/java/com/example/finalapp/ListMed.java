@@ -89,7 +89,7 @@ public class ListMed extends AppCompatActivity {
         m = new Model();
         m.setTitle(title);
         m.setDescription(des);
-        m.setImg(R.drawable.pills);
+        m.setImg(R.drawable.med);
         models.add(m);
         return models;
 

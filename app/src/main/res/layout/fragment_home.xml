@@ -1,21 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    >
 
-    <Button
-        android:id="@+id/buttonsign_out"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:text="Sign Out"
-        android:textAllCaps="false">
+        android:layout_height="110dp"
+        android:background="@drawable/p"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    </Button>
 
-    <Button
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_marginTop="300dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"            >
+            <Button
+                android:id="@+id/list_view"
+                android:layout_width="190dp"
+                android:layout_height="130dp"
+                android:background="@drawable/g"
+                />
+            <Button
+                android:layout_width="190dp"
+                android:layout_height="130dp"
+                android:background="@drawable/gg"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <Button
+                android:layout_width="190dp"
+                android:layout_height="130dp"
+                android:background="@drawable/ggg"
+                />
+            <Button
+                android:layout_width="190dp"
+                android:layout_height="130dp"
+                android:background="@drawable/gggg"
+                />
+        </LinearLayout>
+
+        <Button
+            android:layout_marginTop="100dp"
+            android:id="@+id/buttonsign_out"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="Sign Out"
+            android:textAllCaps="false">
+
+        </Button>
+
+
+    </LinearLayout>
+
+
+
+  <!--  <Button
         android:id="@+id/pick_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +92,7 @@
         android:layout_height="wrap_content"
         android:text="Button" />
 
-    <!--   <EditText
+       <EditText
          android:id="@+id/ed1"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
@@ -74,4 +136,4 @@
          android:text="Channel 3"
          android:textAllCaps="false"></Button>
          -->
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
