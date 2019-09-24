@@ -1,5 +1,9 @@
 package com.example.finalapp;
 
+import android.view.Display;
+
+import java.util.Comparator;
+
 public class Model {
 
     private String title,description;
@@ -28,6 +32,14 @@ public class Model {
     public int getImg() {
         return img;
     }
+
+
+    public static final Comparator<Model> MORNING = new Comparator<Model>() {
+        @Override
+        public int compare(Model model, Model t1) {
+            return model.getTitle().compareTo(t1.getTitle());
+        }
+    };
 
 
 }

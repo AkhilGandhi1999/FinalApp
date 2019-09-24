@@ -22,6 +22,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ListMed extends AppCompatActivity {
 
@@ -36,6 +37,8 @@ public class ListMed extends AppCompatActivity {
     MyAdaptor myAdaptor1;
     ArrayList<Model> models = new ArrayList<>();
     ArrayList<Model> models1 = new ArrayList<>();
+
+    String type;
 
 
     public String title = " ", des = " ";
@@ -69,15 +72,24 @@ public class ListMed extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
 
+      //  Intent intent = getIntent();
+       // type = intent.getStringExtra("title");
 
+      //  if(type=="MORNING")
+      //  {
+
+
+       // }
         LoadData();
+
+
         //myAdaptor = new MyAdaptor(getApplicationContext(), models);
 
         findViewById(R.id.float_bt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent list_all = new Intent(getApplicationContext(), InsertMed.class);
-                startActivityForResult(list_all,0);
+                startActivityForResult(list_all, 0);
             }
         });
         //  recyclerView.setAdapter(myAdaptor);
@@ -89,7 +101,7 @@ public class ListMed extends AppCompatActivity {
         m = new Model();
         m.setTitle(title);
         m.setDescription(des);
-        m.setImg(R.drawable.med);
+        m.setImg(R.drawable.medicine);
         models.add(m);
         return models;
 
@@ -103,7 +115,7 @@ public class ListMed extends AppCompatActivity {
         String json = gson.toJson(models);
         editor.putString(ARRAY_LIST, json);
         editor.apply();
-      //  Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+        //  Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
     }
 
     public void LoadData() {
@@ -111,7 +123,7 @@ public class ListMed extends AppCompatActivity {
         SharedPreferences sharedPreferences1 = getSharedPreferences(SHARED_PEF, Context.MODE_PRIVATE);
         json = sharedPreferences1.getString(ARRAY_LIST, null);
         if (json == null) {
-            Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_SHORT).show();
             return;
         }
         Gson gson = new Gson();
@@ -135,7 +147,9 @@ public class ListMed extends AppCompatActivity {
             m.setImg(R.drawable.pills);
             Toast.makeText(getApplicationContext(), "Load", Toast.LENGTH_LONG).show();
         }*/
-        Toast.makeText(getApplicationContext(), "Load", Toast.LENGTH_LONG).show();
+     //   Toast.makeText(getApplicationContext(), "Load", Toast.LENGTH_LONG).show();
+        Collections.sort(models,Model.MORNING);
+        Toast.makeText(getApplicationContext(), models.toString(), Toast.LENGTH_LONG).show();
         myAdaptor = new MyAdaptor(getApplicationContext(), models);
         recyclerView.setAdapter(myAdaptor);
     }

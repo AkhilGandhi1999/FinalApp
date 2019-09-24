@@ -56,6 +56,7 @@ public class HomeFragment extends Fragment   {
             @Override
             public void onClick(View view) {
                 Intent list = new Intent(getContext(),ListMed.class);
+                list.putExtra("type","MORNING");
                 startActivity(list);
             }
         });
