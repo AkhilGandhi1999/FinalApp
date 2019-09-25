@@ -1,12 +1,10 @@
 package com.example.finalapp;
 
-import android.view.Display;
-
 import java.util.Comparator;
 
 public class Model {
 
-    private String title,description;
+    private String title,description,type;
     private int img;
 
     public String getTitle() {
@@ -31,6 +29,13 @@ public class Model {
 
     public int getImg() {
         return img;
+    }
+
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
     }
 
 

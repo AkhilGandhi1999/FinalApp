@@ -42,7 +42,6 @@ public class MyAdaptor extends RecyclerView.Adapter<MyHolder> {
         holder.t2.setText(models.get(position).getDescription());
         holder.img1.setImageResource(models.get(position).getImg());
 
-
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClickListener(View v, int position) {

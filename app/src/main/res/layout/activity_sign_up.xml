@@ -2,9 +2,7 @@
 
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2196f3">
@@ -23,6 +21,47 @@
             android:layout_gravity="center"
             app:srcCompat="@drawable/bb" />
 
+
+        <EditText
+            android:id="@+id/user_name"
+            android:layout_width="294dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/rc1"
+            android:ems="10"
+            android:hint="Enter Name"
+            android:layout_marginTop="35dp"
+            android:inputType="textPassword"
+            android:paddingLeft="20dp"
+             />
+
+
+        <EditText
+            android:id="@+id/user_age"
+            android:layout_width="294dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/rc1"
+            android:ems="10"
+            android:hint="Your Age"
+            android:layout_marginTop="35dp"
+            android:inputType="textPassword"
+            android:paddingLeft="20dp"
+            />
+
+
+        <EditText
+            android:id="@+id/user_gender"
+            android:layout_width="294dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/rc1"
+            android:ems="10"
+            android:hint="Your Gender"
+            android:layout_marginTop="35dp"
+            android:inputType="textPassword"
+            android:paddingLeft="20dp"
+            />
 
         <EditText
             android:id="@+id/editText"
@@ -54,7 +93,7 @@
             android:id="@+id/editText5"
             android:layout_width="294dp"
             android:layout_height="50dp"
-        android:layout_gravity="center"
+            android:layout_gravity="center"
             android:background="@drawable/rc1"
             android:ems="10"
             android:hint="Confirm Password"
@@ -72,11 +111,7 @@
          android:layout_marginBottom="35dp"
          android:id="@+id/button3"
          >
-
-
      </Button>
-
-
     </LinearLayout>
 
 </ScrollView>

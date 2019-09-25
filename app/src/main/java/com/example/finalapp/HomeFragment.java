@@ -3,9 +3,6 @@ package com.example.finalapp;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.core.app.NotificationManagerCompat;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -57,6 +52,30 @@ public class HomeFragment extends Fragment   {
             public void onClick(View view) {
                 Intent list = new Intent(getContext(),ListMed.class);
                 list.putExtra("type","MORNING");
+                startActivity(list);
+            }
+        });
+        view.findViewById(R.id.list_view1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent list = new Intent(getContext(),ListMed.class);
+                list.putExtra("type1","AFTERNOON");
+                startActivity(list);
+            }
+        });
+        view.findViewById(R.id.list_view2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent list = new Intent(getContext(),ListMed.class);
+                list.putExtra("type2","EVENING");
+                startActivity(list);
+            }
+        });
+        view.findViewById(R.id.list_view3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent list = new Intent(getContext(),ListMed.class);
+                list.putExtra("type3","NIGHT");
                 startActivity(list);
             }
         });

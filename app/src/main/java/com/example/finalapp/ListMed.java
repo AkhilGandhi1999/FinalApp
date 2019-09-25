@@ -1,28 +1,23 @@
 package com.example.finalapp;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class ListMed extends AppCompatActivity {
 
@@ -32,18 +27,23 @@ public class ListMed extends AppCompatActivity {
 
 
     RecyclerView recyclerView;
-    //  RecyclerView recyclerView1;
     MyAdaptor myAdaptor;
-    MyAdaptor myAdaptor1;
     ArrayList<Model> models = new ArrayList<>();
-    ArrayList<Model> models1 = new ArrayList<>();
+    ArrayList<Model> models2 = new ArrayList<>();
+    ArrayList<Model> models3 = new ArrayList<>();
+    ArrayList<Model> models4 = new ArrayList<>();
+    ArrayList<Model> models5 = new ArrayList<>();
 
-    String type;
+
+    String type, type2, type3, type4;
 
 
-    public String title = " ", des = " ";
+    public String title = " ", des = " ",ty = "";
     Model m = new Model();
-    Model m1 = new Model();
+    Model m2 = new Model();
+    Model m3 = new Model();
+    Model m4 = new Model();
+    Model m5 = new Model();
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -54,8 +54,9 @@ public class ListMed extends AppCompatActivity {
                 if (resultCode == Activity.RESULT_OK) {
                     title = data.getStringExtra("key1");
                     des = data.getStringExtra("key2");
+                    ty = data.getStringExtra("key3");
                     Toast.makeText(getApplicationContext(), title, Toast.LENGTH_LONG).show();
-                    models = getList(title, des);
+                    models = getList(title, des,ty);
                     myAdaptor = new MyAdaptor(getApplicationContext(), models);
                     recyclerView.setAdapter(myAdaptor);
                     saveData();
@@ -72,18 +73,25 @@ public class ListMed extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
 
-      //  Intent intent = getIntent();
-       // type = intent.getStringExtra("title");
+        Intent intent = getIntent();
+        type = intent.getStringExtra("type");
+        type2 = intent.getStringExtra("type1");
+        type3 = intent.getStringExtra("type2");
+        type4 = intent.getStringExtra("type3");
 
-      //  if(type=="MORNING")
-      //  {
+        Toast.makeText(getApplicationContext(),type,Toast.LENGTH_SHORT).show();
 
+        if (!(type == null)) {
+            LoadData(type);
+       }
+        else if (!(type2 == null)) {
+            LoadData(type2);
+        } else if (!(type3 == null)) {
+            LoadData(type3);
+        } else if (!(type4 == null )) {
+            LoadData(type4);
+        }
 
-       // }
-        LoadData();
-
-
-        //myAdaptor = new MyAdaptor(getApplicationContext(), models);
 
         findViewById(R.id.float_bt).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,15 +100,15 @@ public class ListMed extends AppCompatActivity {
                 startActivityForResult(list_all, 0);
             }
         });
-        //  recyclerView.setAdapter(myAdaptor);
 
     }
 
-    private ArrayList<Model> getList(String title, String des) {
+    private ArrayList<Model> getList(String title, String des,String ty) {
 
         m = new Model();
         m.setTitle(title);
         m.setDescription(des);
+        m.setType(ty);
         m.setImg(R.drawable.medicine);
         models.add(m);
         return models;
@@ -118,12 +126,12 @@ public class ListMed extends AppCompatActivity {
         //  Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
     }
 
-    public void LoadData() {
+    public void LoadData(String types) {
         String json;
         SharedPreferences sharedPreferences1 = getSharedPreferences(SHARED_PEF, Context.MODE_PRIVATE);
         json = sharedPreferences1.getString(ARRAY_LIST, null);
         if (json == null) {
-           // Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_SHORT).show();
             return;
         }
         Gson gson = new Gson();
@@ -133,25 +141,51 @@ public class ListMed extends AppCompatActivity {
         models = gson.fromJson(json, type);
 
 
-        //    m2 = (ArrayList<String>) ObjectSerializer.deserialize(sharedPreferences1.getString(ARRAY_LIST, ObjectSerializer.serialize(new ArrayList<String>())));
+        if (types.equals("MORNING")) {
 
+            for (int i = 0; i < models.size(); i++) {
+                m2 = models.get(i);
+                if (m2.getType().equals(types)) {
+                    models2.add(m2);
+                }
+            }
 
-        //  Toast.makeText(getApplicationContext(),models1.toString(), Toast.LENGTH_LONG).show();
+            myAdaptor = new MyAdaptor(getApplicationContext(), models2);
+            recyclerView.setAdapter(myAdaptor);
+        } else if (types.equals("AFTERNOON")) {
+            for (int i = 0; i < models.size(); i++) {
+                m3 = models.get(i);
+                if (m3.getType().equals(types)) {
+                    models3.add(m3);
+                }
+            }
 
+            myAdaptor = new MyAdaptor(getApplicationContext(), models3);
+            recyclerView.setAdapter(myAdaptor);
+        } else if (types.equals("EVENING")) {
+            for (int i = 0; i < models.size(); i++) {
+                m4 = models.get(i);
+                if (m4.getType().equals(types)) {
+                    models4.add(m4);
+                }
+            }
 
-      /* for(int i=0;i<models1.size();i++)
-        {
-            m = new Model();
-            m.setTitle("News Feed");
-            m.setDescription("This is news feed description");
-            m.setImg(R.drawable.pills);
-            Toast.makeText(getApplicationContext(), "Load", Toast.LENGTH_LONG).show();
-        }*/
-     //   Toast.makeText(getApplicationContext(), "Load", Toast.LENGTH_LONG).show();
-        Collections.sort(models,Model.MORNING);
-        Toast.makeText(getApplicationContext(), models.toString(), Toast.LENGTH_LONG).show();
-        myAdaptor = new MyAdaptor(getApplicationContext(), models);
-        recyclerView.setAdapter(myAdaptor);
+            myAdaptor = new MyAdaptor(getApplicationContext(), models4);
+            recyclerView.setAdapter(myAdaptor);
+        } else if (types.equals("NIGHT")) {
+            for (int i = 0; i < models.size(); i++) {
+                m5 = models.get(i);
+                if (m5.getType().equals(types)) {
+                    models5.add(m5);
+                }
+            }
+
+            myAdaptor = new MyAdaptor(getApplicationContext(), models5);
+            recyclerView.setAdapter(myAdaptor);
+        }
+
+        //Collections.sort(models, Model.MORNING);
+
     }
 
 }
