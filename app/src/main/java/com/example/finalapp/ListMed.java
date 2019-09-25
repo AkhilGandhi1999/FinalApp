@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -34,11 +35,12 @@ public class ListMed extends AppCompatActivity {
     ArrayList<Model> models4 = new ArrayList<>();
     ArrayList<Model> models5 = new ArrayList<>();
 
+    TextView text;
 
     String type, type2, type3, type4;
 
 
-    public String title = " ", des = " ",ty = "";
+    public String title = " ", des = " ", ty = "";
     Model m = new Model();
     Model m2 = new Model();
     Model m3 = new Model();
@@ -56,7 +58,7 @@ public class ListMed extends AppCompatActivity {
                     des = data.getStringExtra("key2");
                     ty = data.getStringExtra("key3");
                     Toast.makeText(getApplicationContext(), title, Toast.LENGTH_LONG).show();
-                    models = getList(title, des,ty);
+                    models = getList(title, des, ty);
                     myAdaptor = new MyAdaptor(getApplicationContext(), models);
                     recyclerView.setAdapter(myAdaptor);
                     saveData();
@@ -73,22 +75,24 @@ public class ListMed extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
 
+
+        text = (TextView) findViewById(R.id.na);
+
         Intent intent = getIntent();
         type = intent.getStringExtra("type");
         type2 = intent.getStringExtra("type1");
         type3 = intent.getStringExtra("type2");
         type4 = intent.getStringExtra("type3");
 
-        Toast.makeText(getApplicationContext(),type,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), type, Toast.LENGTH_SHORT).show();
 
         if (!(type == null)) {
             LoadData(type);
-       }
-        else if (!(type2 == null)) {
+        } else if (!(type2 == null)) {
             LoadData(type2);
         } else if (!(type3 == null)) {
             LoadData(type3);
-        } else if (!(type4 == null )) {
+        } else if (!(type4 == null)) {
             LoadData(type4);
         }
 
@@ -103,7 +107,7 @@ public class ListMed extends AppCompatActivity {
 
     }
 
-    private ArrayList<Model> getList(String title, String des,String ty) {
+    private ArrayList<Model> getList(String title, String des, String ty) {
 
         m = new Model();
         m.setTitle(title);
@@ -123,7 +127,7 @@ public class ListMed extends AppCompatActivity {
         String json = gson.toJson(models);
         editor.putString(ARRAY_LIST, json);
         editor.apply();
-        //  Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
     }
 
     public void LoadData(String types) {
@@ -131,7 +135,7 @@ public class ListMed extends AppCompatActivity {
         SharedPreferences sharedPreferences1 = getSharedPreferences(SHARED_PEF, Context.MODE_PRIVATE);
         json = sharedPreferences1.getString(ARRAY_LIST, null);
         if (json == null) {
-            Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Nothing to Show", Toast.LENGTH_SHORT).show();
             return;
         }
         Gson gson = new Gson();
@@ -143,6 +147,7 @@ public class ListMed extends AppCompatActivity {
 
         if (types.equals("MORNING")) {
 
+            text.setText("Morning Medicines");
             for (int i = 0; i < models.size(); i++) {
                 m2 = models.get(i);
                 if (m2.getType().equals(types)) {
@@ -153,6 +158,9 @@ public class ListMed extends AppCompatActivity {
             myAdaptor = new MyAdaptor(getApplicationContext(), models2);
             recyclerView.setAdapter(myAdaptor);
         } else if (types.equals("AFTERNOON")) {
+
+            text.setText("Afternoon Medicines");
+
             for (int i = 0; i < models.size(); i++) {
                 m3 = models.get(i);
                 if (m3.getType().equals(types)) {
@@ -163,6 +171,8 @@ public class ListMed extends AppCompatActivity {
             myAdaptor = new MyAdaptor(getApplicationContext(), models3);
             recyclerView.setAdapter(myAdaptor);
         } else if (types.equals("EVENING")) {
+            text.setText("Evening Medicines");
+
             for (int i = 0; i < models.size(); i++) {
                 m4 = models.get(i);
                 if (m4.getType().equals(types)) {
@@ -173,6 +183,8 @@ public class ListMed extends AppCompatActivity {
             myAdaptor = new MyAdaptor(getApplicationContext(), models4);
             recyclerView.setAdapter(myAdaptor);
         } else if (types.equals("NIGHT")) {
+            text.setText("Night Medicines");
+
             for (int i = 0; i < models.size(); i++) {
                 m5 = models.get(i);
                 if (m5.getType().equals(types)) {

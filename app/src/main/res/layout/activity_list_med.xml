@@ -6,7 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".ListMed">
 
+    <TextView
+        android:id="@+id/na"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#030303"
+        android:textSize="42sp"
+        android:textStyle="bold|italic"
+        android:gravity="center"
+        app:fontFamily="sans-serif-condensed-medium"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/na"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recycleview"
@@ -20,7 +32,7 @@
         android:id="@+id/float_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_add"
+        app:srcCompat="@drawable/ic_add"
         android:backgroundTint="#ff0000"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
