@@ -10,14 +10,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 public class MainActivity extends AppCompatActivity {
     Button bt1;
@@ -39,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this,navbar.class));
             finish();
         }
-
 
 
 

@@ -14,6 +14,15 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.charts.Pie;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class GraphFragment extends Fragment {
 
@@ -37,7 +46,20 @@ public class GraphFragment extends Fragment {
 
 
         view = inflater.inflate(R.layout.fragment_graph, null);
-        editText = view.findViewById(R.id.input);
+
+
+        Pie pie = AnyChart.pie();
+
+        List<DataEntry> data = new ArrayList<>();
+        data.add(new ValueDataEntry("John", 10000));
+        data.add(new ValueDataEntry("Jake", 12000));
+        data.add(new ValueDataEntry("Peter", 18000));
+
+        pie.data(data);
+
+        AnyChartView anyChartView = (AnyChartView) view.findViewById(R.id.any_chart_view);
+        anyChartView.setChart(pie);
+     /*   editText = view.findViewById(R.id.input);
         textView = view.findViewById(R.id.dis_text);
         aSwitch = view.findViewById(R.id.switch_1);
         bt1 = view.findViewById(R.id.apply);
@@ -56,7 +78,7 @@ public class GraphFragment extends Fragment {
         });
 
         LoadData();
-        update_views();
+        update_views();*/
 
         return view ;
     }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FinalApp</string>
+    <string name="app_name">Care Buddy</string>
     <string name="title_activity_navbar">navbar</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
