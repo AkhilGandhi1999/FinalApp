@@ -10,9 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PieChart">
-
-        </activity>
+        <activity android:name=".search"></activity>
+        <activity android:name=".PieChart"></activity>
         <activity
             android:name=".MedDes"
             android:parentActivityName=".ListMed" />
@@ -65,7 +64,7 @@
             android:name=".MainActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleTask"
-            android:taskAffinity=""></activity>
+            android:taskAffinity="" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -73,9 +72,9 @@
 
         <receiver android:name=".NotificationRec" />
     </application>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 </manifest>

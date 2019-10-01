@@ -11,18 +11,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#030303"
-        android:textSize="42sp"
+        android:textSize="30sp"
         android:textStyle="bold|italic"
-        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
         app:fontFamily="sans-serif-condensed-medium"
         />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="15dp"
         android:layout_below="@+id/na"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recycleview"
-
         >
 
 

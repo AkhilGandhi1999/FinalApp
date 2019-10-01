@@ -38,7 +38,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
+        findViewById(R.id.search).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),search.class);
+                startActivity(intent);
+            }
+        });
         login_bt.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 loginUser();

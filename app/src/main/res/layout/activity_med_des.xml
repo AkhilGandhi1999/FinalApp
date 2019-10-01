@@ -44,11 +44,11 @@
         />
 
     <com.anychart.AnyChartView
-        android:layout_below="@+id/des_txt2"
         android:id="@+id/any_chart_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_width="395dp"
+        android:layout_height="523dp"
+        android:layout_below="@+id/des_txt2"
+        android:layout_marginTop="68dp" />
 
 
 </RelativeLayout>

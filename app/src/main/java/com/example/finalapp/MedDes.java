@@ -13,7 +13,12 @@ import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
-import com.anychart.charts.Pie;
+import com.anychart.charts.Cartesian;
+import com.anychart.core.cartesian.series.Column;
+import com.anychart.enums.Anchor;
+import com.anychart.enums.HoverMode;
+import com.anychart.enums.Position;
+import com.anychart.enums.TooltipPositionMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,25 +41,59 @@ public class MedDes extends AppCompatActivity {
         String ides = intent.getStringExtra("des");
         byte[] mbytes = getIntent().getByteArrayExtra("image");
 
-        Bitmap bitmap = BitmapFactory.decodeByteArray(mbytes,0,mbytes.length);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(mbytes, 0, mbytes.length);
 
-     //   actionBar.setTitle(ititle);
+        //   actionBar.setTitle(ititle);
 
         t1.setText(ititle);
         t2.setText(ides);
         i1.setImageBitmap(bitmap);
 
-        Pie pie = AnyChart.pie();
+        AnyChartView anyChartView = findViewById(R.id.any_chart_view);
+
+        Cartesian cartesian = AnyChart.column();
 
         List<DataEntry> data = new ArrayList<>();
-        data.add(new ValueDataEntry("John", 10000));
-        data.add(new ValueDataEntry("Jake", 12000));
-        data.add(new ValueDataEntry("Peter", 18000));
+        data.add(new ValueDataEntry("Day 1", 0));
+        data.add(new ValueDataEntry("Day 2 ", 1));
+        data.add(new ValueDataEntry("Day 3", 1));
+        data.add(new ValueDataEntry("Day 4", 0));
 
-        pie.data(data);
+        data.add(new ValueDataEntry("Day 5", 1));
 
-        AnyChartView anyChartView = (AnyChartView) findViewById(R.id.any_chart_view);
-        anyChartView.setChart(pie);
+        data.add(new ValueDataEntry("Day 6", 0));
+        data.add(new ValueDataEntry("Day 7", 1));
+        data.add(new ValueDataEntry("Day 8", 0));
+
+        data.add(new ValueDataEntry("Day 9", 1));
+        data.add(new ValueDataEntry("Day 10", 0));
+        data.add(new ValueDataEntry("Day 11", 1));
+
+
+        Column column = cartesian.column(data);
+
+        column.tooltip()
+                .titleFormat("{%X}")
+                .position(Position.CENTER_BOTTOM)
+                .anchor(Anchor.CENTER_BOTTOM)
+                .offsetX(0d)
+                .offsetY(0d)
+                .format("{%Value}");
+
+        cartesian.animation(true);
+        cartesian.title("Your Intake Record");
+
+        //  cartesian.yScale().minimum(0);
+
+        cartesian.yAxis(0).labels().format("{%Value}");
+
+        cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
+        cartesian.interactivity().hoverMode(HoverMode.BY_X);
+
+        cartesian.xAxis(0).title("Days");
+        cartesian.yAxis(0).title("Consumed");
+
+        anyChartView.setChart(cartesian);
 
     }
 

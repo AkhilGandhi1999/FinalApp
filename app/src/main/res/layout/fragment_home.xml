@@ -24,7 +24,7 @@
         android:layout_marginTop="100dp"
         android:text="MY MEDICINE"
         android:textColor="#030303"
-        android:textSize="52sp"
+        android:textSize="45sp"
         android:textStyle="bold|italic"
         app:fontFamily="sans-serif-condensed-medium"
         app:layout_constraintStart_toStartOf="parent"
