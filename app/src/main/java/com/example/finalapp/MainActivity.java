@@ -1,5 +1,6 @@
 package com.example.finalapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,18 +35,10 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser() != null)
         {
-            startActivity(new Intent(MainActivity.this,navbar.class));
-            finish();
+          login();
         }
 
 
-        findViewById(R.id.search).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),search.class);
-                startActivity(intent);
-            }
-        });
         login_bt.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 loginUser();
@@ -54,13 +48,27 @@ public class MainActivity extends AppCompatActivity {
         bt1.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 Intent signup_int = new Intent(MainActivity.this,SignUp.class);
-                signup_int.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                signup_int.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK );
-                startActivity(signup_int);
+                startActivityForResult(signup_int,1);
             }
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode)
+        {
+            case 1:
+                if(resultCode== Activity.RESULT_OK)
+                {
+                    Toast.makeText(MainActivity.this, "You Can Now Login", Toast.LENGTH_LONG).show();
+
+                }
+                    break;
+
+        }
+    }
 
     public void loginUser() {
         String email = this.email_ed.getText().toString();
@@ -80,10 +88,8 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_LONG).show();
                         email_ed.setText("");
                         pass_ed.setText("");
-                        Intent profile = new Intent(MainActivity.this, navbar.class);
-                        profile.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(profile);
-                        finish();
+                        login();
+
                     }
                     else {
                         Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
@@ -93,6 +99,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void login()
+    {
+        Intent profile = new Intent(MainActivity.this, navbar.class);
+       // profile.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(profile);
+        finish();
+    }
     private void initialize() {
         bt1 = (Button) findViewById(R.id.button2);
         login_bt = (Button) findViewById(R.id.button);

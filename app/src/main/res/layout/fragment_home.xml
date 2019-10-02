@@ -10,18 +10,38 @@
         android:layout_width="match_parent"
         android:layout_height="110dp"
         android:background="@drawable/p"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="45sp"
+            android:layout_marginLeft="60dp"
+            android:textStyle="bold|italic"
+            android:text="" />
+
+        <ImageView
+            android:id="@+id/out"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="65dp"
+            android:src="@drawable/user"
+            />
+
     </LinearLayout>
+
 
     <TextView
         android:id="@+id/my_med"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:text="MY MEDICINE"
         android:textColor="#030303"
         android:textSize="45sp"
@@ -30,12 +50,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-
-        <LinearLayout
+    <LinearLayout
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="300dp"
+            android:layout_marginTop="200dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -76,20 +95,25 @@
                     android:background="@drawable/gggg" />
             </LinearLayout>
 
+        <TextView
+            android:id="@+id/upcoming"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="20dp"
+            android:text="UPCOMING MEDICINE"
+            android:textColor="#030303"
+            android:textSize="30sp"
+            android:textStyle="bold|italic"
+            app:fontFamily="sans-serif-condensed-medium"/>
 
-            <Button
-                android:id="@+id/buttonsign_out"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="100dp"
-                android:gravity="center"
-                android:text="Sign Out"
-                android:textAllCaps="false">
-
-            </Button>
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         </LinearLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

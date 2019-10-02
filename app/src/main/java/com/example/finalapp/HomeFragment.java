@@ -8,45 +8,57 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
-import com.google.firebase.auth.FirebaseAuth;
-
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class HomeFragment extends Fragment   {
 
     private View view;
     private Button bt1, bt2;
-    private FirebaseAuth mAuth;
-    private EditText et1,et2;
+    private TextView name;
     TimePickerDialog timePickerDialog;
     NotificationManagerCompat notificationManagerCompat;
+
+    DatabaseReference userdata;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
         final NotificationDemo notificationDemo = new NotificationDemo(getContext());
 
-        mAuth = FirebaseAuth.getInstance();
         view = inflater.inflate(R.layout.fragment_home, null);
 
-      //  et1 = view.findViewById(R.id.ed1);
-       // et2 = view.findViewById(R.id.ed2);
+        userdata = FirebaseDatabase.getInstance().getReference("users");
 
-        view.findViewById(R.id.buttonsign_out).setOnClickListener(new View.OnClickListener() {
+
+         name = view.findViewById(R.id.username);
+
+        name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                Intent main = new Intent(getContext(), MainActivity.class);
-                main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(main);
+                Intent out = new Intent(getContext(),SignOut.class);
+                startActivity(out);
             }
         });
 
+        view.findViewById(R.id.out).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent out1 = new Intent(getContext(),SignOut.class);
+                startActivity(out1);
+            }
+        });
         view.findViewById(R.id.list_view).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,6 +89,25 @@ public class HomeFragment extends Fragment   {
                 Intent list = new Intent(getContext(),ListMed.class);
                 list.putExtra("type3","NIGHT");
                 startActivity(list);
+            }
+        });
+
+        userdata.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot userd : dataSnapshot.getChildren())
+                {
+                    User user = userd.getValue(User.class);
+                    name.setText(user.name);
+                    Toast.makeText(getContext(),"Welcome back " + user.name,Toast.LENGTH_LONG).show();
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
 

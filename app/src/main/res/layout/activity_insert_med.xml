@@ -28,19 +28,7 @@
 
 </EditText>
 
-    <EditText
-        android:id="@+id/time_med"
-        android:layout_width="294dp"
-        android:layout_height="55dp"
-        android:layout_gravity="center"
-        android:background="@drawable/rc1"
-        android:layout_marginTop="30dp"
-        android:hint="Medicine Time"
-        android:paddingLeft="18dp"
 
-        >
-
-    </EditText>
     <EditText
         android:id="@+id/time_med1"
         android:layout_width="294dp"
@@ -48,7 +36,7 @@
         android:layout_gravity="center"
         android:background="@drawable/rc1"
         android:layout_marginTop="30dp"
-        android:hint="Medicine Time"
+        android:hint="Medicine "
         android:paddingLeft="18dp"
 
         >
@@ -62,6 +50,22 @@
         android:layout_gravity="center"
         android:text="SUBMIT"
         />
+    <Button
+        android:id="@+id/pick_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Set Timer"></Button>
+
+    <Button
+        android:id="@+id/pick_days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Pick Dates"></Button>
+
 
 
 </LinearLayout>

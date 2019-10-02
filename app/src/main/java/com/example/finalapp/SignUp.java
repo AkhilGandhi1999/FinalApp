@@ -1,5 +1,6 @@
 package com.example.finalapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -15,6 +16,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUp extends AppCompatActivity {
     private EditText confirm_ed;
@@ -24,14 +27,17 @@ public class SignUp extends AppCompatActivity {
     private Button sign_up;
     private EditText name, age, gender;
 
+    DatabaseReference databaseuser ;
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView((int) R.layout.activity_sign_up);
 
-
         initialize();
         mAuth = FirebaseAuth.getInstance();
+        databaseuser = FirebaseDatabase.getInstance().getReference("users");
+
         sign_up.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 reg_new();
@@ -42,11 +48,11 @@ public class SignUp extends AppCompatActivity {
 
     public void reg_new() {
 
-        String email = email_ed.getText().toString();
+         String email = email_ed.getText().toString();
         String password = pass_ed.getText().toString();
-        String n = name.getText().toString();
-        String a = age.getText().toString();
-        String g = gender.getText().toString();
+         String n = name.getText().toString();
+         String a = age.getText().toString();
+         String g = gender.getText().toString();
 
         if (!TextUtils.equals(password, confirm_ed.getText().toString())) {
             Toast.makeText(getApplicationContext(), "Password not match", Toast.LENGTH_LONG).show();
@@ -55,14 +61,16 @@ public class SignUp extends AppCompatActivity {
         } else if (TextUtils.isEmpty(password)) {
             Toast.makeText(getApplicationContext(), "Please enter password!", Toast.LENGTH_LONG).show();
         } else {
+            String id = databaseuser.push().getKey();
+            User user = new User(n,a,g,email);
+
+            databaseuser.child(id).setValue(user);
             this.mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 public void onComplete(Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Toast.makeText(SignUp.this.getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
-
-                        Intent nav = new Intent(SignUp.this, navbar.class);
-                        nav.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(nav);
+                       Intent nav = new Intent();
+                       setResult(Activity.RESULT_OK,nav);
                         finish();
 
                     } else {

@@ -52,15 +52,9 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
     }
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        fetchLocation();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -96,6 +90,7 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
                     });
             final AlertDialog alert = builder.create();
             alert.show();
+
             //Intent enableGpsIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             //startActivityForResult(enableGpsIntent, PERMISSIONS_REQUEST_ENABLE_GPS);
         } else {
@@ -149,7 +144,7 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
         switch (requestCode) {
             case Request_code:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //Toast.makeText(getContext(),"out",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"out",Toast.LENGTH_SHORT).show();
 
                     fetchLocation();
                 }
