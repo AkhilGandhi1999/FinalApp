@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -26,6 +28,7 @@ public class ListMed extends AppCompatActivity {
     public static final String ARRAY_LIST = "ArrayList";
     // public static final String DES_LIST = "DesList";
 
+    DatabaseReference mod;
 
     RecyclerView recyclerView;
     MyAdaptor myAdaptor;
@@ -75,6 +78,7 @@ public class ListMed extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
 
+        mod = FirebaseDatabase.getInstance().getReference("models");
 
         text = (TextView) findViewById(R.id.na);
 
@@ -125,6 +129,8 @@ public class ListMed extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(models);
+        String id = mod.push().getKey();
+        mod.child(id).setValue(json);
         editor.putString(ARRAY_LIST, json);
         editor.apply();
         Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
@@ -143,7 +149,6 @@ public class ListMed extends AppCompatActivity {
         }.getType();
 
         models = gson.fromJson(json, type);
-
 
         if (types.equals("MORNING")) {
 

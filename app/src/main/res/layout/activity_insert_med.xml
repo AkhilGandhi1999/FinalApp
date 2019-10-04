@@ -21,12 +21,21 @@
     android:background="@drawable/rc1"
     android:layout_marginTop="250dp"
     android:hint="Medicine Name"
-    android:paddingLeft="18dp"
-
-    >
-
+    android:paddingLeft="18dp">
 
 </EditText>
+
+    <EditText
+        android:id="@+id/med_des"
+        android:layout_width="294dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:background="@drawable/rc1"
+        android:layout_marginTop="30dp"
+        android:hint="Medicine Description"
+        android:paddingLeft="18dp">
+
+    </EditText>
 
 
     <EditText

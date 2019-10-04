@@ -37,7 +37,7 @@ public class DatePicker extends AppCompatActivity {
         ArrayList<Integer> list = new ArrayList<>();
         list.add(2);
 
-        calendar.deactivateDates(list);
+
         ArrayList<Date> arrayList = new ArrayList<>();
         try {
             SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
@@ -55,7 +55,6 @@ public class DatePicker extends AppCompatActivity {
 
         calendar.init(lastYear.getTime(), nextYear.getTime(), new SimpleDateFormat("MMMM, YYYY", Locale.getDefault())) //
                 .inMode(CalendarPickerView.SelectionMode.RANGE) //
-                .withDeactivateDates(list)
                 .withSubTitles(getSubTitles())
                 .withHighlightedDates(arrayList);
 

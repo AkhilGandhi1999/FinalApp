@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -71,7 +70,7 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
         String med_n = med_name.getText().toString();
         String med_ty = med_type.getText().toString();
 
-        Toast.makeText(getApplicationContext(), med_n, Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(), med_n, Toast.LENGTH_LONG).show();
         Intent submit = new Intent();
         submit.putExtra("key1", med_n);
         submit.putExtra("key2", med_T);
@@ -82,16 +81,21 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
 
     private void init() {
         med_name = (EditText) findViewById(R.id.name_med);
+        med_time = (EditText) findViewById(R.id.med_des) ;
         med_type = (EditText) findViewById(R.id.time_med1);
     }
 
     @Override
     public void onTimeSet(android.widget.TimePicker timePicker, int i, int i1) {
         Calendar c = Calendar.getInstance();
-        c.set(Calendar.HOUR_OF_DAY, i);
-        c.set(Calendar.MINUTE, i1);
-        c.set(Calendar.SECOND, 0);
+       // c.set(Calendar.HOUR_OF_DAY, i);
+        //c.set(Calendar.MINUTE, i1);
+        //c.set(Calendar.SECOND, 0);
+      //  c.get(Calendar.DATE);
+       // String e = String.valueOf(c.get(Calendar.DATE));
+      //  Toast.makeText(getApplicationContext(), e, Toast.LENGTH_LONG).show();
 
+        c.set(2019,9,5,i,i1,0);
         startAlarm(c);
     }
 }

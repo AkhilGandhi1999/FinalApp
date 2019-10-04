@@ -62,10 +62,8 @@ public class MyAdaptor extends RecyclerView.Adapter<MyHolder> {
                 change.putExtra("image", bytes);
                 change.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 c.startActivity(change);
-
             }
         });
-
     }
 
     @Override

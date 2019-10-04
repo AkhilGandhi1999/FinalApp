@@ -43,12 +43,24 @@
         android:layout_marginLeft="20dp"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/start_end"
+        android:text="Start and End"
+        android:textSize="18sp"
+        android:layout_below="@id/des_txt2"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="#000"
+        />
+
     <com.anychart.AnyChartView
         android:id="@+id/any_chart_view"
-        android:layout_width="395dp"
-        android:layout_height="523dp"
+        android:layout_width="393dp"
+        android:layout_height="430dp"
         android:layout_below="@+id/des_txt2"
-        android:layout_marginTop="68dp" />
+        android:layout_marginTop="161dp" />
 
 
 </RelativeLayout>

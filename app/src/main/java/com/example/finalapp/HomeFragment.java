@@ -14,12 +14,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment   {
@@ -31,6 +38,11 @@ public class HomeFragment extends Fragment   {
     NotificationManagerCompat notificationManagerCompat;
 
     DatabaseReference userdata;
+    DatabaseReference models1;
+    ArrayList<Model> models = new ArrayList<>();
+
+    RecyclerView recyclerView;
+    MyAdaptor myAdaptor;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -40,9 +52,12 @@ public class HomeFragment extends Fragment   {
         view = inflater.inflate(R.layout.fragment_home, null);
 
         userdata = FirebaseDatabase.getInstance().getReference("users");
+        models1 = FirebaseDatabase.getInstance().getReference("models");
 
+        recyclerView = view.findViewById(R.id.top);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
-         name = view.findViewById(R.id.username);
+        name = view.findViewById(R.id.username);
 
         name.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +107,27 @@ public class HomeFragment extends Fragment   {
             }
         });
 
+        models1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot m : dataSnapshot.getChildren())
+                {
+                    String json = m.getValue(String.class);
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<ArrayList<Model>>() {
+                    }.getType();
+                    models = gson.fromJson(json, type);
+                    myAdaptor = new MyAdaptor(getContext(), models);
+                    recyclerView.setAdapter(myAdaptor);
+                  //  Toast.makeText(getContext(),models.toString(),Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         userdata.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -103,6 +139,8 @@ public class HomeFragment extends Fragment   {
                     Toast.makeText(getContext(),"Welcome back " + user.name,Toast.LENGTH_LONG).show();
                 }
             }
+
+
 
 
             @Override
