@@ -99,8 +99,6 @@ public class ListMed extends AppCompatActivity {
         } else if (!(type4 == null)) {
             LoadData(type4);
         }
-
-
         findViewById(R.id.float_bt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,11 +106,8 @@ public class ListMed extends AppCompatActivity {
                 startActivityForResult(list_all, 0);
             }
         });
-
     }
-
     private ArrayList<Model> getList(String title, String des, String ty) {
-
         m = new Model();
         m.setTitle(title);
         m.setDescription(des);
@@ -120,9 +115,7 @@ public class ListMed extends AppCompatActivity {
         m.setImg(R.drawable.medicine);
         models.add(m);
         return models;
-
     }
-
     public void saveData() {
 
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PEF, Context.MODE_PRIVATE);
@@ -184,7 +177,6 @@ public class ListMed extends AppCompatActivity {
                     models4.add(m4);
                 }
             }
-
             myAdaptor = new MyAdaptor(getApplicationContext(), models4);
             recyclerView.setAdapter(myAdaptor);
         } else if (types.equals("NIGHT")) {
@@ -196,13 +188,9 @@ public class ListMed extends AppCompatActivity {
                     models5.add(m5);
                 }
             }
-
             myAdaptor = new MyAdaptor(getApplicationContext(), models5);
             recyclerView.setAdapter(myAdaptor);
         }
-
         //Collections.sort(models, Model.MORNING);
-
     }
-
 }

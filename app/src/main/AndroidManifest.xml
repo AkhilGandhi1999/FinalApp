@@ -12,8 +12,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".SignOut"></activity>
         <activity android:name=".DatePicker" />
-        <activity android:name=".search" />
-        <activity android:name=".PieChart" />
         <activity
             android:name=".MedDes"
             android:parentActivityName=".ListMed" />

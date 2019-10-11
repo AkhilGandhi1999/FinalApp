@@ -53,6 +53,7 @@ public class MyAdaptor extends RecyclerView.Adapter<MyHolder> {
 
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
+
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 
                 byte[] bytes = stream.toByteArray();

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,6 +41,14 @@ public class MedDes extends AppCompatActivity {
         String ititle = intent.getStringExtra("title");
         String ides = intent.getStringExtra("des");
         byte[] mbytes = getIntent().getByteArrayExtra("image");
+
+
+        findViewById(R.id.delete_node).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         Bitmap bitmap = BitmapFactory.decodeByteArray(mbytes, 0, mbytes.length);
 

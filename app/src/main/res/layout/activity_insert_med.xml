@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InsertMed"
-    android:background="#2196f3"
-    >
+    android:background="#2196f3">
+
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-<EditText
-    android:id="@+id/name_med"
-    android:layout_width="294dp"
-    android:layout_height="55dp"
-    android:layout_gravity="center"
-    android:background="@drawable/rc1"
-    android:layout_marginTop="250dp"
-    android:hint="Medicine Name"
-    android:paddingLeft="18dp">
-
-</EditText>
+    <EditText
+        android:id="@+id/name_med"
+        android:layout_width="294dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:background="@drawable/rc1"
+        android:layout_marginTop="188dp"
+        android:hint="Medicine Name"
+        android:gravity="center" />
 
     <EditText
         android:id="@+id/med_des"
@@ -33,10 +29,50 @@
         android:background="@drawable/rc1"
         android:layout_marginTop="30dp"
         android:hint="Medicine Description"
-        android:paddingLeft="18dp">
+        android:gravity="center" />
 
-    </EditText>
+    <RadioGroup
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        >
 
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="60dp"
+            android:text="MORNING" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40dp"
+            android:text="AFTERNOON" />
+
+    </RadioGroup>
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        >
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="60dp"
+            android:text="EVENING" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_height="match_parent"
+            android:text="NIGHT" />
+
+    </RadioGroup>
 
     <EditText
         android:id="@+id/time_med1"
@@ -45,27 +81,8 @@
         android:layout_gravity="center"
         android:background="@drawable/rc1"
         android:layout_marginTop="30dp"
-        android:hint="Medicine "
-        android:paddingLeft="18dp"
-
-        >
-
-    </EditText>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/submit1"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center"
-        android:text="SUBMIT"
-        />
-    <Button
-        android:id="@+id/pick_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="Set Timer"></Button>
+        android:hint="Medicine"
+        android:paddingLeft="18dp" />
 
     <Button
         android:id="@+id/pick_days"
@@ -73,9 +90,23 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Pick Dates"></Button>
+        android:text="Pick Dates"/>
 
+    <Button
+        android:id="@+id/pick_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Timer"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/submit1"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:text="SUBMIT" />
 
 </LinearLayout>
 

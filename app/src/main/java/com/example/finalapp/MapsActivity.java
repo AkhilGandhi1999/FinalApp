@@ -36,22 +36,19 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
-public class MapsActivity extends Fragment implements OnMapReadyCallback  {
+public class MapsActivity extends Fragment implements OnMapReadyCallback {
 
 
     GoogleMap map;
-    GoogleMap m1;
-    double latitude;
-    double longitude;
     private int PROXIMITY_RADIUS = 1000;
     SearchView searchView;
     Location currentloc;
 
-    Button b1,b2;
+    Button b1, b2;
 
     FusedLocationProviderClient fusedLocationProviderClient;
 
-    public static final int Request_code = 1;
+    public static final int Request_code = 101;
     public static final int PERMISSIONS_REQUEST_ENABLE_GPS = 100;
 
 
@@ -66,7 +63,6 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback  {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,11 +70,10 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback  {
         View rootView = inflater.inflate(R.layout.activity_maps, container, false);
         b1 = rootView.findViewById(R.id.hos);
         b2 = rootView.findViewById(R.id.phar);
-        Places.initialize(getContext(),"AIzaSyA3I7QCOGXO4XQBFlhfZYL65J7b03rdpqo");
+        Places.initialize(getContext(), "AIzaSyA3I7QCOGXO4XQBFlhfZYL65J7b03rdpqo");
         PlacesClient placesClient = Places.createClient(getContext());
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-           // Toast.makeText(getContext(), "in1", Toast.LENGTH_LONG).show();
             loc_checker();
         } else {
             requestPermissions();
@@ -103,21 +98,14 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback  {
                     });
             final AlertDialog alert = builder.create();
             alert.show();
-        }
-        else {
+        } else {
             fetchLocation();
         }
     }
 
     private void requestPermissions() {
-            // Toast.makeText(getContext(), "in", Toast.LENGTH_LONG).show();
-            ActivityCompat.requestPermissions(getActivity(), new String[]
-                    {Manifest.permission.ACCESS_FINE_LOCATION}, Request_code);
-            ActivityCompat.requestPermissions(getActivity(), new String[]
-                    {Manifest.permission.ACCESS_COARSE_LOCATION}, Request_code);
-
-            loc_checker();
-
+        ActivityCompat.requestPermissions(getActivity(), new String[]
+                {Manifest.permission.ACCESS_FINE_LOCATION}, Request_code);
     }
 
     private void fetchLocation() {
@@ -147,6 +135,7 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback  {
 
                             b1.setOnClickListener(new View.OnClickListener() {
                                 String Restaurant = "hospital";
+
                                 @Override
                                 public void onClick(View view) {
                                     map.clear();
@@ -155,13 +144,14 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback  {
                                     DataTransfer[0] = map;
                                     DataTransfer[1] = url;
                                     DataTransfer[2] = getContext();
-                                    Toast.makeText(getContext(),url,Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), url, Toast.LENGTH_LONG).show();
                                     GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                                     getNearbyPlacesData.execute(DataTransfer);
                                 }
                             });
                             b2.setOnClickListener(new View.OnClickListener() {
                                 String Restaurant = "pharmacy";
+
                                 @Override
                                 public void onClick(View view) {
                                     map.clear();
@@ -170,7 +160,7 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback  {
                                     DataTransfer[0] = map;
                                     DataTransfer[1] = url;
                                     DataTransfer[2] = getContext();
-                                    Toast.makeText(getContext(),url,Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), url, Toast.LENGTH_LONG).show();
                                     GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                                     getNearbyPlacesData.execute(DataTransfer);
                                 }
@@ -191,10 +181,9 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback  {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        switch (requestCode)
-        {
+        switch (requestCode) {
             case PERMISSIONS_REQUEST_ENABLE_GPS:
-              //  Toast.makeText(getContext(),"out1",Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(getContext(),"out1",Toast.LENGTH_SHORT).show();
 
                 fetchLocation();
                 break;
@@ -216,9 +205,10 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback  {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case Request_code:
+
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getContext(),"out",Toast.LENGTH_SHORT).show();
-                        loc_checker();
+                    Toast.makeText(getContext(), "out", Toast.LENGTH_SHORT).show();
+                    loc_checker();
                 }
                 break;
         }

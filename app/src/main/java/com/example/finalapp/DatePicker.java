@@ -1,5 +1,7 @@
 package com.example.finalapp;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -64,7 +66,43 @@ public class DatePicker extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Intent intent = new Intent();
+                Date startdate = calendar.getSelectedDates().get(0);
+                Date enddate = calendar.getSelectedDates().get(calendar.getSelectedDates().size() - 1);
+                int startdd = 0,startmm = 0,startyy = 0;
+                int enddd = 0,endmm = 0,endyy = 0;
+                String pattern = "yyyy-MM-dd";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+                String startDate = simpleDateFormat.format(startdate);
+                String endDate = simpleDateFormat.format(enddate);
+                for(int i = 0;i < 4;i++){
+                    startyy = startyy * 10 + (startDate.charAt(i) - 48);
+                }
+                for(int i = 5;i < 7;i++){
+                    startmm = startmm * 10 + (startDate.charAt(i) - 48);
+                }
+                for(int i = 8;i < 10;i++){
+                    startdd = startdd * 10 + (startDate.charAt(i) - 48);
+                }
+                for(int i = 0;i < 4;i++){
+                    endyy = endyy * 10 + (endDate.charAt(i) - 48);
+                }
+                for(int i = 5;i < 7;i++){
+                    endmm = endmm * 10 + (endDate.charAt(i) - 48);
+                }
+                for(int i = 8;i < 10;i++){
+                    enddd = enddd * 10 + (endDate.charAt(i) - 48);
+                }
+                intent.putExtra("sday",startdd);
+                intent.putExtra("smon",startmm);
+                intent.putExtra("syear",startyy);
+                intent.putExtra("eday",enddd);
+                intent.putExtra("emon",endmm);
+                intent.putExtra("eyear",endyy);
                 Toast.makeText(DatePicker.this, "list " + calendar.getSelectedDates().toString(), Toast.LENGTH_LONG).show();
+                setResult(Activity.RESULT_OK,intent);
+                finish();
             }
         });
     }
