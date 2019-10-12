@@ -1,22 +1,17 @@
 package com.example.finalapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
-import static com.example.finalapp.App.Channel_1_id; //from app created
+import static com.example.finalapp.App.Channel_1_id;
 import static com.example.finalapp.App.Channel_2_id;
 
 public class NotificationDemo extends AppCompatActivity {
@@ -51,8 +46,13 @@ public class NotificationDemo extends AppCompatActivity {
 
         Intent broadcast = new Intent(
                 appCompatActivity, NotificationRec.class);
+        Intent broadcast1 = new Intent(
+                appCompatActivity, BroadcastRec.class);
+        broadcast1.putExtra("cancel",900);
         broadcast.putExtra("toastmessage", mess); //Name needs to match put extra
         PendingIntent action_int = PendingIntent.getBroadcast(appCompatActivity, 0, broadcast, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent action_int1 = PendingIntent.getBroadcast(appCompatActivity, 1, broadcast1, PendingIntent.FLAG_UPDATE_CURRENT);
+
         //Pending Intent for broadcasting the signal in the app
         // takes flag as last argument and req code as well
 
@@ -62,7 +62,8 @@ public class NotificationDemo extends AppCompatActivity {
                 .setContentTitle(title).setContentText(mess)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(noti_pen)
-                .addAction(R.mipmap.ic_launcher, "Toast", action_int)
+                .addAction(R.mipmap.ic_launcher, "Taken", action_int)
+                .addAction(R.mipmap.ic_launcher, "Dismiss", action_int1)//Make another pending intent for the same ;
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)
                 .setColor(Color.BLUE)

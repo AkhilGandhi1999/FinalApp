@@ -27,6 +27,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class HomeFragment extends Fragment   {
@@ -117,6 +118,7 @@ public class HomeFragment extends Fragment   {
                     Type type = new TypeToken<ArrayList<Model>>() {
                     }.getType();
                     models = gson.fromJson(json, type);
+                    Collections.sort(models, Model.MORNING);
                     myAdaptor = new MyAdaptor(getContext(), models);
                     recyclerView.setAdapter(myAdaptor);
                   //  Toast.makeText(getContext(),models.toString(),Toast.LENGTH_LONG).show();

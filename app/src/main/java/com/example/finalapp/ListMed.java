@@ -191,6 +191,6 @@ public class ListMed extends AppCompatActivity {
             myAdaptor = new MyAdaptor(getApplicationContext(), models5);
             recyclerView.setAdapter(myAdaptor);
         }
-        //Collections.sort(models, Model.MORNING);
+        //
     }
 }

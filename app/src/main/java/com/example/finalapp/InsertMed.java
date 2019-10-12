@@ -7,6 +7,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -45,7 +46,9 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
      LinkedList<Integer> HH;
      LinkedList<Integer> MM;
 
-     DatabaseReference time_m ;
+    public static final String SHARED_PEF = "timepref";
+
+    DatabaseReference time_m ;
     int up = 0;
 
 
@@ -111,18 +114,7 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
         }
     }
 
-    private void startAlarm(Calendar c) {
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, BroadcastRec.class);
-        set++;
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, set, intent, 0);
 
-        if (c.before(Calendar.getInstance())) {
-            c.add(Calendar.DATE, 1);
-        }
-
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
-    }
     public String intToStr(Integer n){
         String num = "";
         while(n > 0){
@@ -130,7 +122,7 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
             num = x + num;
             n = n / 10;
         }
-        if(num.length() == 1){
+        if(num.length() <= 1){
             num = '0' + num;
         }
         return num;
@@ -158,18 +150,19 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
         sdd = ((int)str.charAt(i + 1) - 48) * 10 + ((int)str.charAt(i + 2) - 48);
         i += 2;
         smm = ((int)str.charAt(i + 1) - 48) * 10 + ((int)str.charAt(i + 2) - 48);
-        i += 2;
+        i += 3;
         int four = 4;
         while(four-- > 0){
-            syy = syy * 10 + str.charAt(i++);
+            syy = syy * 10 + (int)(str.charAt(i++) - 48);
         }
+        i--;
         edd = ((int)str.charAt(i + 1) - 48) * 10 + ((int)str.charAt(i + 2) - 48);
         i += 2;
         emm = ((int)str.charAt(i + 1) - 48) * 10 + ((int)str.charAt(i + 2) - 48);
-        i += 2;
+        i += 3;
         four = 4;
         while(four-- > 0){
-            eyy = eyy * 10 + str.charAt(i++);
+            eyy = eyy * 10 + (int)(str.charAt(i++) - 48);
         }
         Medicine Med = new Medicine(Medname,hours,minutes,sdd,smm,syy,edd,emm,eyy);
         return Med;
@@ -202,6 +195,7 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
         meduser.child(id).setValue(MedToStr);
         Log.i("good times",HH.toString() + " " + MM.toString());
         update();
+       // startAlarm();
         Intent submit = new Intent();
         submit.putExtra("key1", med_n);
         submit.putExtra("key2", med_T);
@@ -272,35 +266,59 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
                             + " " + MyMeds.get(up).MedName
                     );
                     up++;
-                }
-            }
 
+                }
+
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
 
-        for(int i = 0;i < 24 * 60;i++){
-            times[i].clear();
-        }
-        Iterator MedItr = MyMeds.iterator();
-        while(MedItr.hasNext()){
-            Medicine tempMed = (Medicine) MedItr.next();
-            //if(valid_date(tempMed)){
-              if(true)
-              {
-                Log.i("opopo","ininin");
-                Iterator HourItr = tempMed.hh.iterator();
-                Iterator MinuteItr = tempMed.mm.iterator();
-                while(HourItr.hasNext() && MinuteItr.hasNext()){
-                    int TimeHH = (Integer) HourItr.next();
-                    int TimeMM = (Integer) MinuteItr.next();
-                    times[TimeHH * 60 + TimeMM].add(tempMed.MedName);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+                int no = 0;
+                for(int i = 0;i < 24 * 60;i++){
+                    if((times[i].size())>0)
+                    {
+                        no +=1;
+                        Intent myIntent = new Intent(getApplicationContext(), BroadcastRec.class);
+                        myIntent.putExtra("cancel",900);
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                                getApplicationContext(), no, myIntent,
+                                PendingIntent.FLAG_UPDATE_CURRENT);
+
+                        alarmManager.cancel(pendingIntent);
+
+                    }
+                    times[i].clear();
                 }
+                Iterator MedItr = MyMeds.iterator();
+                while(MedItr.hasNext()){
+                    Log.i("op","in");
+
+                    Medicine tempMed = (Medicine) MedItr.next();
+                    if(valid_date(tempMed)){
+                        //if(true) {
+                        Log.i("opopo","ininin");
+                        Iterator HourItr = tempMed.hh.iterator();
+                        Iterator MinuteItr = tempMed.mm.iterator();
+                        while(HourItr.hasNext() && MinuteItr.hasNext()){
+                            int TimeHH = (Integer) HourItr.next();
+                            int TimeMM = (Integer) MinuteItr.next();
+                            times[TimeHH * 60 + TimeMM].add(tempMed.MedName);
+                        }
+                    }
+                }
+                setAlarm();
             }
-        }
-        setAlarm();
+        }, 7000);
+
     }
 
     public void setAlarm(){
@@ -309,9 +327,29 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
             String AllMeds = new String("");
             Iterator Meds = times[i].iterator();
             while(Meds.hasNext()){
-                AllMeds = AllMeds + Meds.next() + "\n";
+                AllMeds = AllMeds + Meds.next() + "\n" ;
+            }
+            if((times[i].size())>0)
+            {
+                set++;
+                Calendar c = Calendar.getInstance();
+                c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DATE),hours,minutes,0);
+                Log.i("godyes", String.valueOf(hours ) + " " + String.valueOf(minutes));
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                Intent intt = new Intent(getApplicationContext(), BroadcastRec.class);
+                intt.putExtra("final_not",AllMeds);
+                Log.i("godohh",AllMeds);
+
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(this, set, intt, 0);
+                if (c.before(Calendar.getInstance())) {
+                        c.add(Calendar.DATE, 1);
+                }
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+
             }
             Log.i("OHH ","Alarm Set On : " + Integer.toString(i / 60) + ":" + Integer.toString(i % 60) + "\n" + "Medicine Names : \n" + AllMeds);
         }
+        //saveSet();
     }
+
 }

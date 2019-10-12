@@ -46,6 +46,8 @@ public class MedDes extends AppCompatActivity {
         findViewById(R.id.delete_node).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent chan = new Intent(getApplicationContext(),ListMed.class);
+                startActivity(chan);
 
             }
         });
