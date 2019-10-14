@@ -11,13 +11,21 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    `<ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/medicine"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        />
+
     <EditText
         android:id="@+id/name_med"
         android:layout_width="294dp"
         android:layout_height="55dp"
         android:layout_gravity="center"
         android:background="@drawable/rc1"
-        android:layout_marginTop="188dp"
+        android:layout_marginTop="60dp"
         android:hint="Medicine Name"
         android:gravity="center" />
 
@@ -32,6 +40,7 @@
         android:gravity="center" />
 
     <RadioGroup
+        android:id="@+id/radiogrp"
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -42,11 +51,15 @@
             android:id="@+id/radioButton1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:textColor="#ffff"
+            android:buttonTint="#ffff"
             android:layout_marginLeft="60dp"
             android:text="MORNING" />
 
         <RadioButton
             android:id="@+id/radioButton2"
+            android:textColor="#ffff"
+            android:buttonTint="#ffff"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="40dp"
@@ -62,27 +75,21 @@
             android:id="@+id/radioButton3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:textColor="#ffff"
+            android:buttonTint="#ffff"
             android:layout_marginLeft="60dp"
             android:text="EVENING" />
 
         <RadioButton
             android:id="@+id/radioButton4"
             android:layout_width="wrap_content"
+            android:textColor="#ffff"
+            android:buttonTint="#ffff"
             android:layout_marginLeft="45dp"
             android:layout_height="match_parent"
             android:text="NIGHT" />
 
     </RadioGroup>
-
-    <EditText
-        android:id="@+id/time_med1"
-        android:layout_width="294dp"
-        android:layout_height="55dp"
-        android:layout_gravity="center"
-        android:background="@drawable/rc1"
-        android:layout_marginTop="30dp"
-        android:hint="Medicine"
-        android:paddingLeft="18dp" />
 
     <Button
         android:id="@+id/pick_days"
@@ -90,15 +97,17 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Pick Dates"/>
+        android:background="@drawable/pickdates"
+        />
 
     <Button
         android:id="@+id/pick_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Set Timer"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:background="@drawable/settimer"
+        />
 
     <Button
         android:layout_width="wrap_content"
@@ -106,7 +115,8 @@
         android:id="@+id/submit1"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:text="SUBMIT" />
+        android:background="@drawable/submit"
+        />
 
 </LinearLayout>
 

@@ -43,7 +43,7 @@ public class ListMed extends AppCompatActivity {
     String type, type2, type3, type4;
 
 
-    public String title = " ", des = " ", ty = "";
+    public String title = " ", des = " ", ty = "",start_end="";
     Model m = new Model();
     Model m2 = new Model();
     Model m3 = new Model();
@@ -60,8 +60,9 @@ public class ListMed extends AppCompatActivity {
                     title = data.getStringExtra("key1");
                     des = data.getStringExtra("key2");
                     ty = data.getStringExtra("key3");
+                    start_end = data.getStringExtra("key4");
                     Toast.makeText(getApplicationContext(), title, Toast.LENGTH_LONG).show();
-                    models = getList(title, des, ty);
+                    models = getList(title, des, ty,start_end);
                     myAdaptor = new MyAdaptor(getApplicationContext(), models);
                     recyclerView.setAdapter(myAdaptor);
                     saveData();
@@ -107,11 +108,12 @@ public class ListMed extends AppCompatActivity {
             }
         });
     }
-    private ArrayList<Model> getList(String title, String des, String ty) {
+    private ArrayList<Model> getList(String title, String des, String ty,String start_end) {
         m = new Model();
         m.setTitle(title);
         m.setDescription(des);
         m.setType(ty);
+        m.setStart_e(start_end);
         m.setImg(R.drawable.medicine);
         models.add(m);
         return models;

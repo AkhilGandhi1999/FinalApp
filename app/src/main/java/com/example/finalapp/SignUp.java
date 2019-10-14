@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,7 @@ public class SignUp extends AppCompatActivity {
     private EditText pass_ed;
     private Button sign_up;
     private EditText name, age, gender;
+    private ProgressBar progressBar;
 
     DatabaseReference databaseuser ;
 
@@ -63,6 +65,8 @@ public class SignUp extends AppCompatActivity {
         } else {
             String id = databaseuser.push().getKey();
             User user = new User(n,a,g,email);
+            progressBar.setVisibility(View.VISIBLE);
+            sign_up.setVisibility(View.GONE);
 
             databaseuser.child(id).setValue(user);
             this.mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -93,5 +97,8 @@ public class SignUp extends AppCompatActivity {
         gender = (EditText) findViewById(R.id.user_gender);
 
         sign_up = (Button) findViewById(R.id.button3);
+
+        progressBar = (ProgressBar) findViewById(R.id.pro);
+        progressBar.setVisibility(View.GONE);
     }
 }

@@ -111,7 +111,7 @@ public class DatePicker extends AppCompatActivity {
         final ArrayList<SubTitle> subTitles = new ArrayList<>();
         final Calendar tmrw = Calendar.getInstance();
         tmrw.add(Calendar.DAY_OF_MONTH, 1);
-        subTitles.add(new SubTitle(tmrw.getTime(), "₹1000"));
+
         return subTitles;
     }
 }

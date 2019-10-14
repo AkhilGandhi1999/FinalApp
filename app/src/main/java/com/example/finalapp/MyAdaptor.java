@@ -41,12 +41,14 @@ public class MyAdaptor extends RecyclerView.Adapter<MyHolder> {
         holder.t1.setText(models.get(position).getTitle());
         holder.t2.setText(models.get(position).getDescription());
         holder.img1.setImageResource(models.get(position).getImg());
+        holder.t3.setText(models.get(position).getStart_e());
 
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClickListener(View v, int position) {
                 String gtitle = models.get(position).getTitle();
                 String gdes = models.get(position).getDescription();
+                String gstart = models.get(position).getStart_e();
                 BitmapDrawable bitmapDrawable = (BitmapDrawable) holder.img1.getDrawable();
 
                 Bitmap bitmap = bitmapDrawable.getBitmap();
@@ -61,6 +63,7 @@ public class MyAdaptor extends RecyclerView.Adapter<MyHolder> {
                 change.putExtra("title", gtitle);
                 change.putExtra("des", gdes);
                 change.putExtra("image", bytes);
+                change.putExtra("start",gstart);
                 change.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 c.startActivity(change);
             }

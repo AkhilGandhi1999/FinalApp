@@ -20,19 +20,19 @@
 
         <Button
             android:id="@+id/hos"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/ph1" />
+            android:background="@drawable/hos" />
 
         <Button
             android:id="@+id/phar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/ph2"
+            android:background="@drawable/pharmacy"
              />
 
 

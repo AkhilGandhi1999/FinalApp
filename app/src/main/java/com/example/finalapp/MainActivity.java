@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     Button login_bt;
     private FirebaseAuth mAuth;
     private EditText pass_ed;
+    ProgressBar progressBar;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -74,16 +76,19 @@ public class MainActivity extends AppCompatActivity {
         String email = this.email_ed.getText().toString();
         String password = this.pass_ed.getText().toString();
 
+
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(MainActivity.this, "Please Enter your email id", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(password)) {
             Toast.makeText(MainActivity.this, "Please Enter your Password", Toast.LENGTH_LONG).show();
         } else {
 
-
+            login_bt.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
             this.mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 public void onComplete(Task<AuthResult> task) {
                     if (task.isSuccessful()) {
+
 
                         Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_LONG).show();
                         email_ed.setText("");
@@ -111,5 +116,7 @@ public class MainActivity extends AppCompatActivity {
         login_bt = (Button) findViewById(R.id.button);
         email_ed = (EditText) findViewById(R.id.editText3);
         pass_ed = (EditText) findViewById(R.id.editText4);
+        progressBar = (ProgressBar) findViewById(R.id.progbar);
+        progressBar.setVisibility(View.GONE);
     }
 }

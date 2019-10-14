@@ -24,14 +24,12 @@
         </activity>
         <activity
             android:name=".InsertMed"
-            android:excludeFromRecents="true"
-            android:launchMode="singleTask"
-            android:taskAffinity="" />
+
+            />
         <activity
             android:name=".ListMed"
-            android:excludeFromRecents="true"
-            android:launchMode="singleTask"
-            android:taskAffinity="" />
+
+            />
         <activity android:name=".NotificationDemo" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

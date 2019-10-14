@@ -16,19 +16,21 @@
 
         <TextView
             android:id="@+id/username"
-            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_width="326dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
             android:gravity="center"
+            android:text=""
             android:textColor="#fff"
             android:textSize="45sp"
-            android:layout_marginLeft="60dp"
-            android:textStyle="bold|italic"
-            android:text="" />
+            android:textStyle="bold|italic" />
 
         <ImageView
             android:id="@+id/out"
             android:layout_marginTop="5dp"
-            android:layout_width="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_width="65dp"
             android:layout_height="65dp"
             android:src="@drawable/user"
             />

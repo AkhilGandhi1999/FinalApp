@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 public class Model {
 
-    private String title,description,type;
+    private String title,description,start_e,type;
     private int img;
 
     public String getTitle() {
@@ -39,12 +39,17 @@ public class Model {
     }
 
 
+    public String getStart_e() {
+        return start_e;
+    }
+
+    public void setStart_e(String start_e) {
+        this.start_e = start_e;
+    }
     public static final Comparator<Model> MORNING = new Comparator<Model>() {
         @Override
         public int compare(Model model, Model t1) {
             return model.getTitle().compareTo(t1.getTitle());
         }
     };
-
-
 }

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,7 +25,7 @@ import java.util.List;
 
 public class MedDes extends AppCompatActivity {
 
-    TextView t1, t2;
+    TextView t1, t2,t3;
     ImageView i1;
 
     @Override
@@ -41,16 +40,10 @@ public class MedDes extends AppCompatActivity {
         String ititle = intent.getStringExtra("title");
         String ides = intent.getStringExtra("des");
         byte[] mbytes = getIntent().getByteArrayExtra("image");
+        String istart = intent.getStringExtra("start");
 
 
-        findViewById(R.id.delete_node).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent chan = new Intent(getApplicationContext(),ListMed.class);
-                startActivity(chan);
 
-            }
-        });
 
         Bitmap bitmap = BitmapFactory.decodeByteArray(mbytes, 0, mbytes.length);
 
@@ -58,6 +51,7 @@ public class MedDes extends AppCompatActivity {
 
         t1.setText(ititle);
         t2.setText(ides);
+        t3.setText(istart);
         i1.setImageBitmap(bitmap);
 
         AnyChartView anyChartView = findViewById(R.id.any_chart_view);
@@ -112,5 +106,6 @@ public class MedDes extends AppCompatActivity {
         t1 = (TextView) findViewById(R.id.des_txt1);
         t2 = (TextView) findViewById(R.id.des_txt2);
         i1 = (ImageView) findViewById(R.id.img_des1);
+        t3 = (TextView) findViewById(R.id.start_end);
     }
 }

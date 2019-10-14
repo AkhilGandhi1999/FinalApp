@@ -15,9 +15,6 @@ import static com.example.finalapp.App.Channel_1_id;
 import static com.example.finalapp.App.Channel_2_id;
 
 public class NotificationDemo extends AppCompatActivity {
-
-   // public EditText et1, et2;
-
     public NotificationManagerCompat notificationManagerCompat;// compat for backward compatibility
 
     Context appCompatActivity;
@@ -28,26 +25,16 @@ public class NotificationDemo extends AppCompatActivity {
         notificationManagerCompat = NotificationManagerCompat.from(appCompatActivity);
     }
 
-   /* @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notification_demo);
-
-        notificationManagerCompat = NotificationManagerCompat.from(this);// no new required but manager compat for backward compatibility
-       // initialize();
-
-
-    }*/
 
     public void set_channel1(String title,String mess) // View important when using onclick function
     {
-        Intent noti = new Intent(appCompatActivity, HomeFragment.class);
+        Intent noti = new Intent(appCompatActivity, DismissRec.class);
         PendingIntent noti_pen = PendingIntent.getActivity(appCompatActivity, 0, noti, 0);//Pending intent for activity
 
         Intent broadcast = new Intent(
                 appCompatActivity, NotificationRec.class);
         Intent broadcast1 = new Intent(
-                appCompatActivity, BroadcastRec.class);
+                appCompatActivity, NotificationRec.class);
         broadcast1.putExtra("cancel",900);
         broadcast.putExtra("toastmessage", mess); //Name needs to match put extra
         PendingIntent action_int = PendingIntent.getBroadcast(appCompatActivity, 0, broadcast, PendingIntent.FLAG_UPDATE_CURRENT);
