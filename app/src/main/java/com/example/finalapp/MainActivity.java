@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
           login();
         }
 
-
         login_bt.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 loginUser();
@@ -58,17 +57,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         switch (requestCode)
         {
             case 1:
                 if(resultCode== Activity.RESULT_OK)
                 {
                     Toast.makeText(MainActivity.this, "You Can Now Login", Toast.LENGTH_LONG).show();
-
                 }
                     break;
-
         }
     }
 
@@ -88,13 +84,10 @@ public class MainActivity extends AppCompatActivity {
             this.mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 public void onComplete(Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-
-
                         Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_LONG).show();
                         email_ed.setText("");
                         pass_ed.setText("");
                         login();
-
                     }
                     else {
                         Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_LONG).show();

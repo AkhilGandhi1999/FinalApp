@@ -3,6 +3,7 @@ package com.example.finalapp;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.provider.Settings;
 import android.util.Log;
@@ -24,19 +25,24 @@ public class BroadcastRec extends BroadcastReceiver {
     int k =0;
     DatabaseReference fetch;
     ArrayList<String> notify;
+    AudioManager am;
+    int off ;
     @Override
     public void onReceive(final Context context, Intent intent) {
+       am =  (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+
         notify = new ArrayList<>();
         final NotificationDemo notificationDemo = new NotificationDemo(context);
         final MediaPlayer mediaPlayer = MediaPlayer.create(context, Settings.System.DEFAULT_ALARM_ALERT_URI);
         fetch = FirebaseDatabase.getInstance().getReference("times");
+        /*off = intent.getIntExtra("cancel",0);
 
-        if(mediaPlayer.isPlaying())
+        if(off==900)
         {
-            mediaPlayer.stop();
+            am.setRingerMode(1);
             Log.i("cancan","canac");
             return;
-        }
+        }*/
         fetch.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -64,9 +70,8 @@ public class BroadcastRec extends BroadcastReceiver {
                 }
                 Log.i("popo",med + " " + id);
 
-
-                notificationDemo.set_channel1(med,"Working");
-                mediaPlayer.start();
+                notificationDemo.set_channel1(med,"Time to take these Medicines");
+              //  mediaPlayer.start();
                 fetch.child(id).setValue(null);
                 fetch.removeEventListener(this);
             }
@@ -76,19 +81,5 @@ public class BroadcastRec extends BroadcastReceiver {
             }
         });
 
-        //String noti = " ";
-
-       // int can = intent.getIntExtra("cancel",0);
-        //if(can==900)
-        //{
-          //  mediaPlayer.stop();
-            //Log.i("ee","rr");
-        //}
-       // else
-        //{
-           // noti =
-          //  Log.i("eeppoo",intent.getStringExtra("final_not"));
-
-        //}
     }
 }

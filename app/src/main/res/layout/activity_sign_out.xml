@@ -8,28 +8,48 @@
     tools:context=".SignOut">
 
     <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="415dp"
         android:layout_height="499dp"
         android:src="@drawable/sout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/edit_pro"
+    <TextView
+        android:id="@+id/out1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="96dp"
-        android:layout_marginEnd="96dp"
-
-        android:layout_marginBottom="148dp"
-        android:background="@drawable/editprofile"
+        android:textSize="20sp"
         android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="592dp"
+        android:background="@drawable/rc1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent" />
 
-    </Button>
+    <TextView
+        android:id="@+id/out3"
+        android:layout_width="wrap_content"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginBottom="384dp"
+        android:background="@drawable/rc1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/out2"
+        android:layout_width="wrap_content"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginBottom="488dp"
+        android:background="@drawable/rc1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonsign_out"
@@ -38,13 +58,24 @@
         android:layout_gravity="center"
         android:layout_marginStart="96dp"
         android:layout_marginEnd="96dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="220dp"
         android:background="@drawable/signout"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
     </Button>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="145dp"
+        android:layout_height="137dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginBottom="692dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/user" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

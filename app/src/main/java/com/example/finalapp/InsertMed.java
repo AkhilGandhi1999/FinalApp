@@ -37,6 +37,9 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
      private EditText med_name;
      private EditText med_des;
      DatabaseReference meduser;
+    DatabaseReference grap;
+
+    int if_pos;
 
     DatabaseReference time_user;
     RadioGroup rg;
@@ -44,7 +47,15 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
     public int startdd,startmm,startyy,enddd,endmm,endyy;
 
     public InsertMed() {
-       // update();
+
+    }
+
+    public InsertMed(int if_pos) {
+        this.if_pos = if_pos;
+        if(if_pos==9090)
+        {
+            update();
+        }
     }
 
     private LinkedList<String> times[] = new LinkedList[24 * 60];
@@ -68,6 +79,7 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
 
         meduser = FirebaseDatabase.getInstance().getReference("med_string");
         time_user = FirebaseDatabase.getInstance().getReference("times");
+        grap = FirebaseDatabase.getInstance().getReference("graph");
 
         Calendar upto = Calendar.getInstance();
         upto.set(upto.get(Calendar.YEAR),upto.get(Calendar.MONTH),upto.get(Calendar.DATE),23,59,0);
@@ -212,7 +224,7 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
         String MedToStr = PleaseParse(medicine);
         String id = meduser.push().getKey();
         meduser.child(id).setValue(MedToStr);
-        Log.i("good times",HH.toString() + " " + MM.toString());
+
         update();
        // startAlarm();
         Intent submit = new Intent();
@@ -354,11 +366,13 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 Intent intt = new Intent(getApplicationContext(), BroadcastRec.class);
                 String id = time_user.push().getKey();
+                String id1 = grap.push().getKey();
+
                 AllMeds = AllMeds + "!" + id;
                 time_user.child(id).setValue(AllMeds);
+                Graph graph = new Graph(AllMeds,0);
+                grap.child(id1).setValue(graph);
                 //intt.putExtra("final_not",AllMeds);
-                 Log.i("godohh",AllMeds);
-                Log.i("setsexy ",Integer.toString(set));
 
 
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(this, set, intt, 0);

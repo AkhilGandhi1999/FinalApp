@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +13,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import static com.example.finalapp.App.Channel_1_id;
-import static com.example.finalapp.App.Channel_2_id;
 
 public class NotificationDemo extends AppCompatActivity {
     public NotificationManagerCompat notificationManagerCompat;// compat for backward compatibility
@@ -36,21 +36,25 @@ public class NotificationDemo extends AppCompatActivity {
         Intent broadcast1 = new Intent(
                 appCompatActivity, NotificationRec.class);
         broadcast1.putExtra("cancel",900);
-        broadcast.putExtra("toastmessage", mess); //Name needs to match put extra
+        broadcast1.putExtra("toames",title);
+        broadcast.putExtra("toastmessage", title); //Name needs to match put extra
         PendingIntent action_int = PendingIntent.getBroadcast(appCompatActivity, 0, broadcast, PendingIntent.FLAG_UPDATE_CURRENT);
         PendingIntent action_int1 = PendingIntent.getBroadcast(appCompatActivity, 1, broadcast1, PendingIntent.FLAG_UPDATE_CURRENT);
 
         //Pending Intent for broadcasting the signal in the app
         // takes flag as last argument and req code as well
+        Bitmap largeIcon = BitmapFactory.decodeResource(appCompatActivity.getResources(), R.drawable.medicine);
 
 
         Notification notification = new NotificationCompat.Builder(appCompatActivity, Channel_1_id)
+                .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setSmallIcon(R.drawable.ic_alarm)//Can have various properties
+                .setLargeIcon(largeIcon)
                 .setContentTitle(title).setContentText(mess)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(noti_pen)
                 .addAction(R.mipmap.ic_launcher, "Taken", action_int)
-                .addAction(R.mipmap.ic_launcher, "Dismiss", action_int1)//Make another pending intent for the same ;
+                .addAction(R.mipmap.ic_launcher, "Dismiss", action_int1)
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)
                 .setColor(Color.BLUE)
@@ -61,7 +65,7 @@ public class NotificationDemo extends AppCompatActivity {
 
     }
 
-    public void set_channel2(String title,String mess) {
+   /* public void set_channel2(String title,String mess) {
 
 
         Notification notification = new NotificationCompat.Builder(appCompatActivity, Channel_2_id)
@@ -74,12 +78,13 @@ public class NotificationDemo extends AppCompatActivity {
         notificationManagerCompat.notify(2, notification);
     }
 
-    public void set_channel3(String title,String mess,Bitmap largeicon)
+    public void set_channel3(String title,String mess)
     {
 
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.medicine);
         Notification notification = new NotificationCompat.Builder(appCompatActivity, Channel_2_id)
                 .setSmallIcon(R.drawable.ic_alarm)
-                .setLargeIcon(largeicon)
+                .setLargeIcon(largeIcon)
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText("lkajsd;lasdj;alskdj;asldkj;dafiuwipoeriuwepoirujksdfj;sjdfs;dlfkjds;lfkj s;fkjsn;dklfj;sldfkjs;ldfkjs;dfkljs;dflkjs;dflkjs;dlfkjs;dlfkjs;dflkjs;dlfkjs;dflk")
                 .setBigContentTitle("Big Content")
@@ -91,8 +96,5 @@ public class NotificationDemo extends AppCompatActivity {
                 .build();
         //Always add small icon for notifications or app crashes
         notificationManagerCompat.notify(3, notification);
-    }
-
-
-
+    }*/
 }

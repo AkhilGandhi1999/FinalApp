@@ -20,6 +20,21 @@
 
     </ImageView>
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="22sp"
+        android:text="Medicine Name : "
+        android:id="@+id/m_name"
+        android:layout_below="@+id/img_des1"
+
+        />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,8 +45,21 @@
         android:textStyle="bold"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/m_name"
         android:layout_below="@+id/img_des1"
          />
+
+    <TextView
+        android:id="@+id/m_des"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description : "
+        android:textSize="18sp"
+        android:layout_below="@+id/des_txt1"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -42,26 +70,33 @@
         android:layout_below="@+id/des_txt1"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/m_des"
+        />
+    <TextView
+        android:id="@+id/m_ty"
+        android:text="Start and End: "
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:layout_below="@id/des_txt2"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/start_end"
-        android:text="Start and End"
+        android:text="Start and End  "
         android:textSize="18sp"
         android:layout_below="@id/des_txt2"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/m_ty"
         android:textColor="#000"
         />
-
-    <com.anychart.AnyChartView
-        android:id="@+id/any_chart_view"
-        android:layout_width="393dp"
-        android:layout_height="430dp"
-        android:layout_below="@+id/des_txt2"
-        android:layout_marginTop="161dp" />
 
 
 </RelativeLayout>

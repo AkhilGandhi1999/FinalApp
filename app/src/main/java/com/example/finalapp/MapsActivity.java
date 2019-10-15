@@ -51,7 +51,6 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
     public static final int Request_code = 101;
     public static final int PERMISSIONS_REQUEST_ENABLE_GPS = 100;
 
-
     public MapsActivity() {
         // Required empty public constructor
     }
@@ -61,8 +60,6 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
 
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,7 +78,6 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
 
         return rootView;
     }
-
 
     private void loc_checker() {
 

@@ -4,6 +4,7 @@ package com.example.finalapp;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -119,6 +120,7 @@ public class HomeFragment extends Fragment   {
                     }.getType();
                     models = gson.fromJson(json, type);
                     Collections.sort(models, Model.MORNING);
+                    Log.i("olo",Integer.toString(models.size()));
                     myAdaptor = new MyAdaptor(getContext(), models);
                     recyclerView.setAdapter(myAdaptor);
                   //  Toast.makeText(getContext(),models.toString(),Toast.LENGTH_LONG).show();
