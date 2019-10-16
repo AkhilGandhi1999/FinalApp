@@ -77,7 +77,6 @@ public class GraphFragment extends Fragment {
 
     public GraphFragment(String m,String d,String t) {
         mod = FirebaseDatabase.getInstance().getReference("final_up");
-        //get_mod = FirebaseDatabase.getInstance().getReference("models");
 
         message = m;
         dd = d;
@@ -94,9 +93,7 @@ public class GraphFragment extends Fragment {
        //  models1 = new ArrayList<>();
          models = getList(message,dd,tak);
          saveData();
-        // LoadData();
-        // myAdaptor = new MyAdaptor(getContext(), models1);
-         //recyclerView.setAdapter(myAdaptor);
+
      }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -110,17 +107,7 @@ public class GraphFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
         LoadData();
-     /*   Pie pie = AnyChart.pie();
 
-        List<DataEntry> data = new ArrayList<>();
-        data.add(new ValueDataEntry("John", 10000));
-        data.add(new ValueDataEntry("Jake", 12000));
-        data.add(new ValueDataEntry("Peter", 18000));
-
-        pie.data(data);
-
-        AnyChartView anyChartView = (AnyChartView) view.findViewById(R.id.any_chart_view);
-        anyChartView.setChart(pie);*/
 
         return view ;
     }
@@ -136,8 +123,7 @@ public class GraphFragment extends Fragment {
 
     public void saveData()
     {
-       // SharedPreferences sharedPreferences = thiscontext.getSharedPreferences(SHARED_PEF, Context.MODE_PRIVATE);
-        //SharedPreferences.Editor editor = sharedPreferences.edit();
+
         Gson gson = new Gson();
         String json = gson.toJson(models);
         String id = mod.push().getKey();
@@ -145,32 +131,11 @@ public class GraphFragment extends Fragment {
        // editor.putString(ARRAY_LIST, json);
         //editor.apply();
 
-       // Toast.makeText(getContext(),"Saved",Toast.LENGTH_LONG).show();
     }
 
     public void LoadData()
     {
-        /*String json;
-        SharedPreferences sharedPreferences1 = thiscontext.getSharedPreferences(SHARED_PEF, Context.MODE_PRIVATE);
-        json = sharedPreferences1.getString(ARRAY_LIST, null);
-        if (json == null) {
-            Toast.makeText(getContext(), "Nothing to Show", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
-        Gson gson = new Gson();
-        Type type = new TypeToken<ArrayList<Model>>() {
-        }.getType();
-
-        models = gson.fromJson(json, type);
-        for (int i = 0; i < models.size(); i++) {
-            m2 = models.get(i);
-                models2.add(m2);
-
-        }
-
-        myAdaptor = new MyAdaptor(getContext(), models2);
-        recyclerView.setAdapter(myAdaptor);*/
         get_mod.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

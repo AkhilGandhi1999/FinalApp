@@ -270,7 +270,7 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
         Date EndDate = new Date();
         try{
             EndDate = new SimpleDateFormat("dd/MM/yyyy").parse(End);
-            Log.i("fucku",StartDate.toString() + "  " +  Today.toString() + "  " + EndDate.toString());
+            Log.i("checking ",StartDate.toString() + "  " +  Today.toString() + "  " + EndDate.toString());
 
         }
         catch(Exception E){
@@ -362,7 +362,7 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
                 set++;
                 Calendar c = Calendar.getInstance();
                 c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DATE),hours,minutes,0);
-                Log.i("godyes", String.valueOf(hours ) + " " + String.valueOf(minutes));
+                Log.i("gody", String.valueOf(hours ) + " " + String.valueOf(minutes));
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 Intent intt = new Intent(getApplicationContext(), BroadcastRec.class);
                 String id = time_user.push().getKey();

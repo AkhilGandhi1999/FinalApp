@@ -35,14 +35,7 @@ public class BroadcastRec extends BroadcastReceiver {
         final NotificationDemo notificationDemo = new NotificationDemo(context);
         final MediaPlayer mediaPlayer = MediaPlayer.create(context, Settings.System.DEFAULT_ALARM_ALERT_URI);
         fetch = FirebaseDatabase.getInstance().getReference("times");
-        /*off = intent.getIntExtra("cancel",0);
 
-        if(off==900)
-        {
-            am.setRingerMode(1);
-            Log.i("cancan","canac");
-            return;
-        }*/
         fetch.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

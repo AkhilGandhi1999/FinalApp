@@ -70,7 +70,7 @@ public class IntroActivity extends AppCompatActivity {
 
         final List<ScreenItem> mList = new ArrayList<>();
         mList.add(new ScreenItem("Set Reminders","Set Reminders for your medicine with easy to use UI and to filter through medicines.Start and End Date of the medicine can be added to set reminders for more then 7 days ",R.drawable.medicine));
-        mList.add(new ScreenItem("Track Your Intake","Track your medicine intake with easy to understand Graphs . Also track your individual medicine intake with the graph ",R.drawable.seo));
+        mList.add(new ScreenItem("Track Your Intake","Track your medicine intake with easy to understand Graphs . Also track your medicine intake with the graph ",R.drawable.seo));
         mList.add(new ScreenItem("Find Stores","According to your location find nearby Hospitals and Pharmacy Stores within 1km radius ",R.drawable.pharmacy));
 
         // setup viewpager

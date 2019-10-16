@@ -153,47 +153,7 @@ public class HomeFragment extends Fragment   {
             }
         });
 
-     /*   view.findViewById(R.id.pick_time).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogFragment newFragment = new TimePicker();
-                newFragment.show(getFragmentManager(),"TimePicker");
-            }
-        });
-        view.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
-
-        view.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String title = et1.getText().toString();
-                String mess = et2.getText().toString();
-                notificationDemo.set_channel1(title,mess);
-            }
-        });
-
-        view.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String title = et1.getText().toString();
-                String mess = et2.getText().toString();
-                notificationDemo.set_channel2(title,mess);
-            }
-        });
-
-        view.findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String title = et1.getText().toString();
-                String mess = et2.getText().toString();
-                Bitmap largeicon =  BitmapFactory.decodeResource(getResources(),R.drawable.bb);
-                notificationDemo.set_channel3(title,mess,largeicon);
-            }
-        });*/
         return view;
     }
 
