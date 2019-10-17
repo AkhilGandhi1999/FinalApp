@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,8 +44,10 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
 
     DatabaseReference time_user;
     RadioGroup rg;
+    RadioGroup rg1;
 
-    public int startdd,startmm,startyy,enddd,endmm,endyy;
+
+    public int startdd = 0,startmm,startyy,enddd,endmm,endyy;
 
     public InsertMed() {
 
@@ -214,12 +217,33 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
     private void Submit() throws ParseException {
         String med_n = med_name.getText().toString();
         String med_de = med_des.getText().toString();
-        String med_ty = ((RadioButton)findViewById(rg.getCheckedRadioButtonId()))
-                .getText().toString();
+        if(med_n.equals("") || med_de.equals(""))
+        {
+            Toast.makeText(getApplicationContext(),"Please Enter the Name and Description",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Log.i("checking", Integer.toString(rg.getCheckedRadioButtonId()) + Integer.toString(rg1.getCheckedRadioButtonId()));
+        if((rg.getCheckedRadioButtonId()==-1)&& (rg1.getCheckedRadioButtonId()==-1))
+        {
+            Toast.makeText(getApplicationContext(),"Type of medicine not selected",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
         String start_end = Integer.toString(startdd) + "/" + Integer.toString(startmm) + " - " + Integer.toString(enddd)
                 + "/" + Integer.toString(endmm);
 
 
+        if(startdd==0)
+        {
+            Toast.makeText(getApplicationContext(),"Please Pick Start and End Date",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(HH.size()==0)
+        {
+            Toast.makeText(getApplicationContext(),"Please Enter the time",Toast.LENGTH_SHORT).show();
+            return;
+        }
         Medicine medicine = new Medicine(med_n,HH,MM,startdd,startmm,startyy,enddd,endmm,endyy);
         String MedToStr = PleaseParse(medicine);
         String id = meduser.push().getKey();
@@ -230,7 +254,18 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
         Intent submit = new Intent();
         submit.putExtra("key1", med_n);
         submit.putExtra("key2", med_de);
-        submit.putExtra("key3",med_ty);
+        if(rg.getCheckedRadioButtonId()!=-1)
+        {
+            String med_ty = ((RadioButton)findViewById(rg.getCheckedRadioButtonId())).getText().toString();
+
+            submit.putExtra("key3",med_ty);
+        }
+        else
+        {
+            String med_ty1 = ((RadioButton)findViewById(rg1.getCheckedRadioButtonId())).getText().toString();
+
+            submit.putExtra("key3",med_ty1);
+        }
         submit.putExtra("key4",start_end);
         setResult(Activity.RESULT_OK, submit);
         finish();
@@ -240,6 +275,7 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
         med_name = (EditText) findViewById(R.id.name_med);
         med_des = (EditText) findViewById(R.id.med_des) ;
         rg = (RadioGroup) findViewById(R.id.radiogrp);
+        rg1 = (RadioGroup) findViewById(R.id.rgrp2);
     }
 
     @Override
@@ -380,11 +416,9 @@ public class InsertMed extends AppCompatActivity implements TimePickerDialog.OnT
                         c.add(Calendar.DATE, 1);
                 }
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
-
             }
             Log.i("OHH ","Alarm Set On : " + Integer.toString(i / 60) + ":" + Integer.toString(i % 60) + "\n" + "Medicine Names : \n" + AllMeds);
         }
         //saveSet();
     }
-
 }

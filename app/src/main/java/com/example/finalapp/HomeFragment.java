@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationManagerCompat;
@@ -140,7 +139,7 @@ public class HomeFragment extends Fragment   {
                 {
                     User user = userd.getValue(User.class);
                     name.setText(user.name);
-                    Toast.makeText(getContext(),"Welcome back " + user.name,Toast.LENGTH_LONG).show();
+                 //  Toast.makeText(getContext(),"Welcome back " + user.name,Toast.LENGTH_LONG).show();
                 }
             }
 
